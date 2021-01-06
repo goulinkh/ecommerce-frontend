@@ -1,0 +1,7 @@
+.container {
+  padding: 2px;
+}
+.select {
+  background-image: url("/icons/anchor-down.svg");
+  background-size: 1.3rem 1.3rem;
+}

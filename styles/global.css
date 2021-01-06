@@ -1,0 +1,68 @@
+@tailwind base;
+
+/* Write your own custom base styles here */
+
+/* Start purging... */
+@tailwind components;
+/* Stop purging. */
+
+html,
+body {
+  @apply bg-gray-50;
+}
+
+/* Write your own custom component styles here */
+.bg-linear-1 {
+  @apply bg-gradient-to-r from-green-400 to-blue-400;
+}
+.border-linear-1 {
+  border-bottom: 6px solid transparent;
+  border-image: linear-gradient(to right, red , yellow);
+  border-image-slice: 1;
+}
+
+.bg-linear-2 {
+  @apply bg-gradient-to-r from-green-100 to-blue-200;
+}
+
+.bg-blur {
+  background-color: rgba(255, 255, 255, 0, 1);
+  backdrop-filter: blur(6px);
+}
+
+/* Start purging... */
+@tailwind utilities;
+/* Stop purging. */
+
+/* Your own custom utilities */
+@import url("/fonts/Poppins-Regular.ttf");
+@import url("/fonts/Poppins-Bold.ttf");
+
+@font-face {
+  font-family: "Poppins";
+  font-weight: 400;
+  src: url("../public/fonts/Poppins-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Poppins";
+  font-weight: 600;
+  src: url("../public/fonts/Poppins-Bold.ttf") format("truetype");
+}
+
+*::-webkit-scrollbar {
+  width: 7px;
+  cursor: pointer;
+  /*background-color: rgba(229, 231, 235, var(--bg-opacity));*/
+
+}
+*::-webkit-scrollbar-track {
+  background-color: rgba(229, 231, 235, 0.6);
+  cursor: pointer;
+  /*background: red;*/
+}
+*::-webkit-scrollbar-thumb {
+  cursor: pointer;
+  background-color: rgba(73,169,230);
+  border-radius: 10px;
+  /*outline: 1px solid slategrey;*/
+}

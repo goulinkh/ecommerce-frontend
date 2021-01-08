@@ -29,7 +29,6 @@ module.exports = {
         fit: "fit-content",
         148: "48rem",
       },
-
       height: {
         0.5: ".125rem",
         fit: "fit-content",
@@ -37,7 +36,7 @@ module.exports = {
     },
   },
   variants: {
-    extend: {},
+    extend: { borderWidth: ["last"] },
   },
   plugins: [require("@tailwindcss/typography"), require("@tailwindcss/forms")],
 };

@@ -6,6 +6,7 @@ import cls from "classnames";
 const ActiveLink = ({
   children,
   activeClassName = "",
+  inactiveClassName = "",
   className = "",
   href,
   regex = null,
@@ -17,9 +18,14 @@ const ActiveLink = ({
   return (
     <Link href={href} {...props}>
       <span
-        className={cls("cursor-pointer", className, {
-          [`${activeClassName}`]: isActive,
-        })}
+        className={cls(
+          "cursor-pointer",
+          {
+            [`${activeClassName}`]: isActive,
+            [`${inactiveClassName}`]: !isActive,
+          },
+          className
+        )}
       >
         {children}
       </span>

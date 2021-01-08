@@ -17,7 +17,7 @@ body {
 }
 .border-linear-1 {
   border-bottom: 6px solid transparent;
-  border-image: linear-gradient(to right, red , yellow);
+  border-image: linear-gradient(to right, red, yellow);
   border-image-slice: 1;
 }
 
@@ -51,9 +51,9 @@ body {
 
 *::-webkit-scrollbar {
   width: 7px;
+  height: 7px;
   cursor: pointer;
   /*background-color: rgba(229, 231, 235, var(--bg-opacity));*/
-
 }
 *::-webkit-scrollbar-track {
   background-color: rgba(229, 231, 235, 0.6);
@@ -62,7 +62,7 @@ body {
 }
 *::-webkit-scrollbar-thumb {
   cursor: pointer;
-  background-color: rgba(73,169,230);
+  background-color: rgb(40 120 171);
   border-radius: 10px;
   /*outline: 1px solid slategrey;*/
 }

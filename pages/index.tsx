@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useEffect } from "react";
 import MouseScroll from "../components/animated-icons/MouseScroll";
 import Button from "../components/Button";
 import Container from "../components/Container";

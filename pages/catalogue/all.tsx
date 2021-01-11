@@ -1,27 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import Layout from "../../components/Layout";
-import { getAllCategories } from "../../utils/catagories";
 import { getAllProducts } from "../../utils/products";
-import { Category as C, Product } from "../../utils/types";
+import { Product } from "../../utils/types";
 
-export default function Category({
-  products,
-  category,
-}: {
-  products: Product[];
-  category: C;
-}) {
-  const router = useRouter();
-  const { slug } = router.query;
-
+export default function CategoryAll({ products }: { products: Product[] }) {
   return (
     <Layout>
-      <h1>
-        Categorie -{">"} {category.name[0].toUpperCase()}
-        {category.name.substr(1)}
-      </h1>
+      <h1>Categorie -{">"} Tout</h1>
       <ul className="flex flex-col md:flex-row  space-x-8 overflow-y-auto p-2">
         {products.map((p, i) => (
           <Link key={i} href={`/products/${p.id}`}>
@@ -47,24 +33,10 @@ export default function Category({
 
 export async function getStaticProps({ params }) {
   const allProducts = await getAllProducts();
-  const allCategories = await getAllCategories();
 
   return {
     props: {
-      products:
-        allProducts ||
-        [].filter((p) => p.categories.find((c) => c.id == params.slug)),
-      category: allCategories.find((c) => c.id == params.slug),
+      products: allProducts,
     }, // will be passed to the page component as props
-  };
-}
-
-export async function getStaticPaths() {
-  const allCategories = await getAllCategories();
-  return {
-    paths: allCategories.map((category) => ({
-      params: { slug: String(category.id) },
-    })),
-    fallback: false, // Will return 404 if id doesn't exist in the list
   };
 }

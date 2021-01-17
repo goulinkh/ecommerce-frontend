@@ -6,8 +6,8 @@ export type Product = {
   description: string;
   created_at: Date;
   updated_at: Date;
-  promotion: Promotion;
-  categories: Category[];
+  promotion?: Promotion;
+  categories?: Category[];
   media: Media[];
 };
 export type Media = {

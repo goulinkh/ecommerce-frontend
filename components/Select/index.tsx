@@ -1,32 +1,37 @@
-import { useState } from "react";
-import styles from "./select.module.css";
 import cls from "classnames";
+import { DetailedHTMLProps, SelectHTMLAttributes } from "react";
+import styles from "./select.module.css";
 export default function Select({
-  style = "gradiant",
+  variant = "gradient",
   bg = "white",
+  children,
+  className = "",
+  ...props
 }: {
-  style?: "gradiant" | "no-border";
+  variant?: "gradient" | "no-border" | "none";
   bg?: string;
-}) {
-  const [o, setO] = useState(false);
+  className?: string;
+  children: React.ReactNode;
+} & DetailedHTMLProps<
+  SelectHTMLAttributes<HTMLSelectElement>,
+  HTMLSelectElement
+>) {
   return (
     <div
-      className={cls("w-fit h-fit rounded", styles.container, {
-        "bg-linear-1": style === "gradiant",
-        "border-none": style === "no-border",
+      className={cls("h-fit rounded", className, {
+        [`bg-linear-1 ${styles.container}`]: variant === "gradient",
+        "border-none": variant === "no-border",
       })}
     >
       <select
         defaultValue="test1"
         className={cls(
-          `pl-4 pr-10 py-2 rounded border-none bg-transparent bg-anchor-down bg-1 bg-clip-border focus:outline-none focus:ring-2 ring-blue-100 bg-${bg}`,
+          `w-full pl-4 pr-10 py-2 rounded border-none bg-transparent bg-anchor-down bg-1 bg-clip-border focus:outline-none focus:ring-2 ring-blue-100 bg-${bg}`,
           styles.select
         )}
+        {...props}
       >
-        <option>TEst 1</option>
-        <option value="test1">TEst 2</option>
-        <option>TEst 3</option>
-        <option>TEst 4</option>
+        {children}
       </select>
     </div>
   );

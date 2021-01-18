@@ -6,11 +6,13 @@ import Footer from "./Footer";
 export default function Layout({
   children,
   navbar = true,
+  footer = true,
   navbarOverlap = false,
   title,
 }: {
   children: React.ReactNode;
   navbar?: boolean;
+  footer?: boolean;
   navbarOverlap?: boolean;
   title?: String;
 }) {
@@ -24,7 +26,7 @@ export default function Layout({
       <div className={cls({ "mt-24": navbar && !navbarOverlap })}>
         {children}
       </div>
-      <Footer />
+      {footer && <Footer />}
     </>
   );
 }

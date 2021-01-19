@@ -33,10 +33,16 @@ module.exports = {
         0.5: ".125rem",
         fit: "fit-content",
       },
+      scale: {
+        "-1": "-1",
+      },
     },
   },
   variants: {
     extend: { borderWidth: ["last"] },
   },
-  plugins: [require("@tailwindcss/typography"), require("@tailwindcss/forms")],
+  plugins: [
+    require("@tailwindcss/typography"),
+    require("@tailwindcss/custom-forms"),
+  ],
 };

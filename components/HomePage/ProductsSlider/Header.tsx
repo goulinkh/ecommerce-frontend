@@ -9,7 +9,7 @@ export default function ProductSliderHeader({
 }) {
   return (
     <div className="w-full pr-12 md:pr-36 lg:pr-48 flex flex-row justify-between items-center">
-      <h3 className="text-lg font-bold">{title}</h3>
+      <h3 className="text-xl font-bold">{title}</h3>
       <Link href={href}>
         <span className="flex flex-row items-center space-x-3 cursor-pointer text-base">
           <span>Voir tout</span>

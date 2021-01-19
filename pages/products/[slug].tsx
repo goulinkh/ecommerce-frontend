@@ -14,7 +14,7 @@ export default function Product({ product }: { product: P }) {
           <Image src={product.media[0]?.url} layout="fill" objectFit="cover" />
         </div>
         <div className="flex flex-col justify-start items-start">
-          <p className=" font-bold text-lg">{product.nom}</p>
+          <p className=" font-bold text-xl">{product.nom}</p>
           <p className="">{product.prix} €</p>
           <p className={cls("text-sm", { "text-green-600": enStock })}>
             {enStock ? "En Stock" : "En repture"} €

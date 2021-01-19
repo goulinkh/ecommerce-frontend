@@ -5,7 +5,7 @@ import SendSVG from "../../public/icons/send.svg";
 export default function ContactForm() {
   return (
     <section className="w-1/3 z-10 flex flex-col items-start justify-center space-y-12 px-10">
-      <h1 className="text-lg font-bold">Contacter nous</h1>
+      <h1 className="text-xl font-bold">Contacter nous</h1>
       <p className="text-base text-gray-700">
         Vous avez une question ou une remarque ? Ecrivez nous un message !
       </p>
@@ -41,12 +41,13 @@ export default function ContactForm() {
         <label htmlFor="contact-message">Type de demande</label>
         <textarea
           id="contact-message"
-          className="resize-none w-full h-40 rounded border border-gray-300"
+          placeholder="Votre message ..."
+          className="resize-none w-full h-44 p-2 rounded border border-gray-300"
         ></textarea>
       </div>
-      <Button fill="linear" className="px-14">
-        <span>Envoyer</span>
+      <Button fill="linear" className="w-full">
         <SendSVG className="h-5 w-5" />
+        <span>Envoyer</span>
       </Button>
     </section>
   );

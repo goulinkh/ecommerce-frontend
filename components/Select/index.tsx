@@ -26,7 +26,7 @@ export default function Select({
       <select
         defaultValue="test1"
         className={cls(
-          `w-full pl-4 pr-10 py-2 rounded border-none bg-transparent bg-anchor-down bg-1 bg-clip-border focus:outline-none focus:ring-2 ring-blue-100 bg-${bg}`,
+          `form-select w-full pl-4 pr-10 py-2 rounded border-none bg-transparent bg-anchor-down bg-1 bg-clip-border focus:outline-none focus:ring-2 ring-blue-100 bg-${bg}`,
           styles.select
         )}
         {...props}

@@ -1,4 +1,4 @@
-import HomePage from "../components/HomePage";
+import HomePage from "../components/pages/HomePage";
 import { getAllProducts } from "../utils/products";
 
 export default function Index(props) {

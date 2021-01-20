@@ -1,5 +1,5 @@
-import { Product } from "../../utils/types";
-import Layout from "../Layout";
+import { Product } from "../../../utils/types";
+import Layout from "../../Layout";
 import FirstSection from "./FirstSection";
 import ProductsSlider from "./ProductsSlider";
 

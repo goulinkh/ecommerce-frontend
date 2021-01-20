@@ -1,10 +1,10 @@
 import cls from "classnames";
 import { motion, useElementScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import AnchorLeftSVG from "../../../public/icons/anchor-left.svg";
-import AnchorRightSVG from "../../../public/icons/anchor-right.svg";
-import { Product } from "../../../utils/types";
-import ProductCard from "../../ProductCard";
+import AnchorLeftSVG from "../../../../public/icons/anchor-left.svg";
+import AnchorRightSVG from "../../../../public/icons/anchor-right.svg";
+import { Product } from "../../../../utils/types";
+import ProductCard from "../../../ProductCard";
 import ProductSliderHeader from "./Header";
 import ProgressBar from "./ProgressBar";
 

@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
-import MouseScroll from "../animated-icons/MouseScroll";
-import Button from "../Button";
-import Container from "../Container";
-import HomeSphere from "../../public/icons/home-sphere.svg";
+import MouseScroll from "../../animated-icons/MouseScroll";
+import Button from "../../Button";
+import Container from "../../Container";
+import HomeSphere from "../../../public/icons/home-sphere.svg";
 
 export default function FirstSection() {
   return (

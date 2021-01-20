@@ -1,5 +1,5 @@
 import Link from "next/link";
-import RightArrowSVG from "../../../public/icons/right-arrow.svg";
+import RightArrowSVG from "../../../../public/icons/right-arrow.svg";
 export default function ProductSliderHeader({
   title,
   href,

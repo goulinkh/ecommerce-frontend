@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const AuthGreetingMessage = () => (
   <div className="flex flex-col justify-center space-y-12 pt-8 md:pt-0">
-    <h1 className="text-xl">
+    <h1 className="text-xl font-bold md:font-normal">
       Bienvenue à
       <Link href="/">
         <span className="cursor-pointer text-blue-400 font-bold pl-4">

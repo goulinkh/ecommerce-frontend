@@ -1,5 +1,6 @@
 import { Product } from "../../../utils/types";
 import Layout from "../../Layout";
+import ContactUs from "./ContactUs";
 import FirstSection from "./FirstSection";
 import ProductsSlider from "./ProductsSlider";
 
@@ -20,6 +21,7 @@ export default function HomePage({ products }: { products: Product[] }) {
         title="Libérer l'esprit"
         href="/catalogue/all"
       />
+      <ContactUs />
     </Layout>
   );
 }

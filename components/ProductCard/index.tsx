@@ -1,32 +1,42 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 import { Product } from "../../utils/types";
+import CartEmptySVG from "../../public/icons/cart-empty.svg";
 
 export default function ProductCard({ product }: { product: Product }) {
+  const enStock = !!product.quantite;
   return (
     <motion.div>
-      <div className="w-52 rounded-lg bg-white shadow-md cursor-pointer  overflow-hidden ">
-        <div className="w-full flex flex-col items-start justify-center">
-          <div className="relative w-full h-52  overflow-h rounded">
-            <Image
-              src={product.media[0]?.url}
-              layout="fill"
-              objectFit="cover"
-            />
+      <Link href={`/products/${product.id}`}>
+        <div className="relative w-52 rounded-lg bg-white shadow-md cursor-pointer  overflow-hidden ">
+          <div className="w-full flex flex-col items-start justify-center">
+            <div className="relative w-full h-52  overflow-h rounded">
+              <Image
+                src={product.media[0]?.url}
+                layout="fill"
+                objectFit="cover"
+              />
+            </div>
+            <p className="pl-4 pt-3 pb-1 font-bold">{product.nom}</p>
+            {!onSale(product) ? (
+              <p className="pl-4 pb-6">{product.prix} €</p>
+            ) : (
+              <div className="pl-4 pb-6 flex flex-row items-center space-x-2">
+                <p className="text-blue-400">{getSalePrice(product)} €</p>
+                <p className="text-sm text-gray-700 line-through">
+                  {product.prix} €
+                </p>
+              </div>
+            )}
           </div>
-          <p className="pl-4 pt-3 pb-1 font-bold">{product.nom}</p>
-          {!onSale(product) ? (
-            <p className="pl-4 pb-6">{product.prix} €</p>
-          ) : (
-            <div className="pl-4 pb-6 flex flex-row items-center space-x-2">
-              <p className="text-blue-400">{getSalePrice(product)} €</p>
-              <p className="text-sm text-gray-700 line-through">
-                {product.prix} €
-              </p>
+          {!enStock && (
+            <div className="absolute h-full w-full rounded-lg top-0 left-0 flex justify-center items-center opacity-25 bg-black">
+              <CartEmptySVG className="w-12 text-white" />
             </div>
           )}
         </div>
-      </div>
+      </Link>
     </motion.div>
   );
 }

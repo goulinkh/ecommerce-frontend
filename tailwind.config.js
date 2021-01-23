@@ -22,6 +22,7 @@ module.exports = {
         "accent-1": "#333",
         "gray-50": "#EDF0F3",
         "blue-400": "#49A9E6",
+        "green-400": "#50D9C4",
         "gray-800": "#333333",
       },
       width: {
@@ -32,6 +33,7 @@ module.exports = {
       height: {
         0.5: ".125rem",
         fit: "fit-content",
+        "37rem": "37rem",
       },
       scale: {
         "-1": "-1",

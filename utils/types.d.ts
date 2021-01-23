@@ -4,6 +4,7 @@ export type Product = {
   prix: number;
   quantite: number;
   description: string;
+  descriptionSummary: string;
   created_at: Date;
   updated_at: Date;
   promotion?: Promotion;

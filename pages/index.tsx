@@ -7,10 +7,14 @@ export default function Index(props) {
 
 export async function getStaticProps({ params }) {
   const allProducts = await getAllProducts();
+  const decorationProducts = allProducts.filter((p) =>
+    p.categories.find((c) => !!c.name.match(/décoration/g))
+  );
 
   return {
     props: {
       products: allProducts,
+      decorationProducts: decorationProducts,
     }, // will be passed to the page component as props
   };
 }

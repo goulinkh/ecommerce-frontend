@@ -1,12 +1,10 @@
-import { motion, useAnimation } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
+import HomeSphere from "../../../public/icons/home-sphere.svg";
 import MouseScroll from "../../animated-icons/MouseScroll";
 import Button from "../../Button";
 import Container from "../../Container";
-import HomeSphere from "../../../public/icons/home-sphere.svg";
-import { useInView } from "react-intersection-observer";
-import { useEffect } from "react";
-import { useFocusGesture } from "framer-motion/types/gestures";
+
 const Lamps = () => (
   <div className="absolute top-0 right-36 z-10">
     <div className="relative w-0 md:w-64 xl:w-80 h-auto">

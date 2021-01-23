@@ -1,6 +1,7 @@
-import { parse } from "path";
+import marked from "marked";
 import config from "../config";
 import { Media, Product } from "./types";
+import { parse } from "node-html-parser";
 
 let cache: Promise<Product[]> = null;
 
@@ -12,6 +13,7 @@ export async function getAllProducts(): Promise<Product[]> {
   }
   cache = (await response.json())?.map((p: Product) => ({
     ...p,
+    ...parseDescription(p.description),
     media: (p.media || []).map(parseMedia),
   }));
   return cache;
@@ -26,5 +28,23 @@ function parseMedia(m: Media): Media {
   if (!!m.mime.match(/^image/)) type = "image";
   if (!!m.mime.match(/^video/)) type = "video";
   else type = "unsupported";
-  return { ...m, url: new URL(m.url, config.strapiURL).href, type };
+  return { ...m, url: cmsURL(m.url), type };
+}
+
+function cmsURL(url: string) {
+  return new URL(url, config.strapiURL).href;
+}
+
+function parseDescription(markdownDescription: string) {
+  const html = marked(markdownDescription);
+  const root = parse(html);
+  const imgs = root.querySelectorAll("img");
+  imgs.forEach((img) => {
+    img.setAttribute("src", cmsURL(img.getAttribute("src")));
+  });
+  const descriptionSummary = root
+    .querySelectorAll("p")
+    .map((e) => e.innerText)
+    .join(" ");
+  return { description: root.toString(), descriptionSummary };
 }

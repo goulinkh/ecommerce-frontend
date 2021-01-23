@@ -6,11 +6,13 @@ export default function Select({
   bg = "white",
   children,
   className = "",
+  innerClassName = "",
   ...props
 }: {
   variant?: "gradient" | "no-border" | "none";
   bg?: string;
   className?: string;
+  innerClassName?: string;
   children: React.ReactNode;
 } & DetailedHTMLProps<
   SelectHTMLAttributes<HTMLSelectElement>,
@@ -26,7 +28,8 @@ export default function Select({
       <select
         defaultValue="test1"
         className={cls(
-          `form-select w-full pl-4 pr-10 py-2 rounded border-none bg-transparent bg-anchor-down bg-1 bg-clip-border focus:outline-none focus:ring-2 ring-blue-100 bg-${bg}`,
+          innerClassName,
+          `cursor-pointer form-select w-full pl-4 pr-10 py-2 rounded border-none bg-transparent bg-anchor-down bg-1 bg-clip-border focus:outline-none  bg-${bg}`,
           styles.select
         )}
         {...props}

@@ -4,6 +4,7 @@ import { useRef } from "react";
 import AnchorLeftSVG from "../../../../public/icons/anchor-left.svg";
 import AnchorRightSVG from "../../../../public/icons/anchor-right.svg";
 import { Product } from "../../../../utils/types";
+import InViewAnimation from "../../../InViewAnimation";
 import ProductCard from "../../../ProductCard";
 import ProductSliderHeader from "./Header";
 import ProgressBar from "./ProgressBar";
@@ -29,7 +30,7 @@ export default function ProductsSlider({
     }
   };
   return (
-    <div
+    <InViewAnimation
       className={cls(
         "pl-12 py-32 md:pl-36 lg:pl-48 flex flex-col items-start w-full space-y-10",
         className
@@ -59,6 +60,6 @@ export default function ProductsSlider({
           />
         </div>
       </div>
-    </div>
+    </InViewAnimation>
   );
 }

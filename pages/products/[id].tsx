@@ -5,11 +5,19 @@ import { Product as P } from "../../utils/types";
 import cls from "classnames";
 import CartAddSVG from "../../public/icons/cart-add.svg";
 import Button from "../../components/Button";
+import ProductImages from "../../components/pages/ProductPage/Images";
+import Container from "../../components/Container";
 export default function Product({ product }: { product: P }) {
   const enStock = !!product.quantite;
   return (
     <Layout>
-      <div className=" flex flex-row overflow-hidden h-72 space-x-24 items-start justify-center">
+      <Container>
+        <section className="grid grid-cols-2 gap-4">
+          <ProductImages firstImage={product.media[0]} images={product.media} />
+          <div>2</div>
+        </section>
+      </Container>
+      {/* <div className=" flex flex-row overflow-hidden h-72 space-x-24 items-start justify-center">
         <div className="relative w-60 h-full  overflow-h rounded">
           <Image src={product.media[0]?.url} layout="fill" objectFit="cover" />
         </div>
@@ -25,7 +33,7 @@ export default function Product({ product }: { product: P }) {
             </Button>
           )}
         </div>
-      </div>
+      </div> */}
     </Layout>
   );
 }
@@ -35,7 +43,7 @@ export async function getStaticProps({ params }) {
 
   return {
     props: {
-      product: allProducts.find((p) => p.id == params.slug),
+      product: allProducts.find((p) => p.id == params.id),
     }, // will be passed to the page component as props
   };
 }
@@ -44,7 +52,7 @@ export async function getStaticPaths() {
   const allProducts = await getAllProducts();
   return {
     paths: allProducts.map((product) => ({
-      params: { slug: String(product.id) },
+      params: { id: String(product.id) },
     })),
     fallback: false, // Will return 404 if id doesn't exist in the list
   };

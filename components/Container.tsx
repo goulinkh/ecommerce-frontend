@@ -2,7 +2,7 @@ import cls from "classnames";
 
 export default function Container({ children, className = "", ...props }) {
   return (
-    <div className={cls("px-12 lg:px-36 2xl:px-48 2xl:max-w-screen-2xl mx-auto", className)} {...props}>
+    <div className={cls("mx-12 lg:mx-36 2xl:mx-60 2xl:max-w-screen-2xl ", className)} {...props}>
       {children}
     </div>
   );

@@ -1,7 +1,9 @@
+import { AnimateSharedLayout } from "framer-motion";
 import Link from "next/link";
 import Button from "../../../components/Button";
 import Checkbox from "../../../components/Checkbox";
 import Layout from "../../../components/Layout";
+import makeAnimatedSeriesDiv from "../../../components/makeAnimatedSeriesDiv";
 import AuthFormContainer from "../../../components/pages/Auth/FormContainer";
 import AuthGreetingMessage from "../../../components/pages/Auth/GreetingMessage";
 import AuthImageCover from "../../../components/pages/Auth/ImageCover";
@@ -12,15 +14,18 @@ import KeySVG from "../../../public/icons/key.svg";
 import ShowPasswordSVG from "../../../public/icons/show-password.svg";
 
 export default function SignIn() {
+  const AnimatedDiv = makeAnimatedSeriesDiv();
+
   return (
     <Layout navbar={false} footer={false}>
       <AuthLogo position="left" />
       <div className="w-screen h-screen md:flex md:flex-row items-center justify-center">
         <AuthImageCover invertX />
         <AuthFormContainer>
-          {" "}
-          <AuthGreetingMessage />
-          <div className="w-full flex flex-col space-y-2">
+          <AnimatedDiv>
+            <AuthGreetingMessage />
+          </AnimatedDiv>
+          <AnimatedDiv className="w-full flex flex-col space-y-2">
             <TextInput
               id="signin-email"
               type="email"
@@ -31,8 +36,8 @@ export default function SignIn() {
             >
               Adresse e-mail
             </TextInput>
-          </div>
-          <div className="w-full flex flex-col space-y-2">
+          </AnimatedDiv>
+          <AnimatedDiv className="w-full flex flex-col space-y-2">
             <TextInput
               id="signin-password"
               type="password"
@@ -48,9 +53,9 @@ export default function SignIn() {
             >
               Mot de passe
             </TextInput>
-          </div>
+          </AnimatedDiv>
           <Checkbox id="signin-remember-me">Se souvenir de moi</Checkbox>
-          <div className="w-full flex flex-col md:flex-row space-y-6 md:space-y-0 md:space-x-2 items-center">
+          <AnimatedDiv className="w-full flex flex-col md:flex-row space-y-6 md:space-y-0 md:space-x-2 items-center">
             <Button fill="linear" className="w-full md:flex-1">
               <span>Se connecter</span>
             </Button>
@@ -64,7 +69,7 @@ export default function SignIn() {
                 </Button>
               </span>
             </Link>
-          </div>
+          </AnimatedDiv>
         </AuthFormContainer>
       </div>
     </Layout>

@@ -17,7 +17,15 @@ export default function Category({
   const { slug } = router.query;
 
   return (
-    <Layout>
+    <Layout navbarOverlap>
+      {/* cover */}
+      <div className="relative w-screen h-80">
+        <Image
+          objectFit="cover"
+          layout="fill"
+          src="/images/catalogue-cover.png "
+        ></Image>
+      </div>
       <h1>
         Categorie -{">"} {category.name[0].toUpperCase()}
         {category.name.substr(1)}

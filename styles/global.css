@@ -63,7 +63,7 @@ body {
 }
 *::-webkit-scrollbar-thumb {
   cursor: pointer;
-  background-color: rgba(0, 0, 0, 0.25);
+  background-color: rgba(0, 20, 36, 0.25);
   border-radius: 10px;
   transition: all 0.3 ease-out;
   /*outline: 1px solid slategrey;*/

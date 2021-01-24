@@ -1,7 +1,7 @@
-import Head from "next/head";
-import Navbar from "./Navbar";
 import cls from "classnames";
+import Head from "next/head";
 import Footer from "./Footer";
+import Navbar from "./Navbar";
 
 export default function Layout({
   children,

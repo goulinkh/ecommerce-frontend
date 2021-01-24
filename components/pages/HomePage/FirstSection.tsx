@@ -16,16 +16,21 @@ const Lamps = () => (
 export default function FirstSection() {
   return (
     <section className="relative bg-linear-2 md:h-screen w-full">
-      <Container className="relative overflow-hidden h-full flex flex-col-reverse md:grid md:grid-cols-2 items-center space-y-28 md:space-y-0">
+      <Container className="relative h-full flex flex-col-reverse md:grid md:grid-cols-2 items-center space-y-28 md:space-y-0">
         <motion.div
           initial="hidden"
           animate="visible"
           variants={{
             hidden: {
-              translateX: -1 * 2000,
+              x: -1 * 2000,
+              opacity: 0,
             },
             visible: {
-              translateX: 0,
+              x: 0,
+              opacity: 1,
+              transition: {
+                opacity: { delay: 0.1 },
+              },
             },
           }}
           className="flex flex-col items-start space-y-6 pb-28 md:pb-0"
@@ -49,10 +54,15 @@ export default function FirstSection() {
           animate="visible"
           variants={{
             hidden: {
-              translateX: 2000,
+              x: 2000,
+              opacity: 0,
             },
             visible: {
-              translateX: 0,
+              x: 0,
+              opacity: 1,
+              transition: {
+                opacity: { delay: 0.1 },
+              },
             },
           }}
           className="w-full h-52 md:h-full relative justify-center items-center z-10"

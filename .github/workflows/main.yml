@@ -18,13 +18,19 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     runs-on: self-hosted
-    container: "node:14-alpine"
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - uses: actions/checkout@v2
       # Runs a set of commands using the runners shell
-      - name: Deployement
-        run: |
-          ls -la
-          pwd
-          
+      - name: Build all
+        run: docker build -t ecommerce-frontend .
+  deployment:
+    runs-on: self-hosted
+    
+    steps:
+      - name: Stop old container
+        run: docker container stop ecommerce-frontend || true
+      - name: Start new container
+        run: docker run --name ecommerce-frontend -d -p 3000:3000 ecommerce-frontend 
+      - name: Check status
+        run: docker run --network container:ecommerce-frontend appropriate/curl -s --retry 10 --retry-connrefused http://localhost:3000/

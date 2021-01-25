@@ -1,7 +1,16 @@
 import marked from "marked";
+import { parse } from "node-html-parser";
 import config from "../config";
 import { Media, Product } from "./types";
-import { parse } from "node-html-parser";
+
+export function getProductsByCatalogue(
+  products: Product[],
+  catalogueName: string
+): Product[] {
+  return products.filter((p) =>
+    p.categories.find((c) => !!c.name.match(new RegExp(catalogueName, "g")))
+  );
+}
 
 let cache: Promise<Product[]> = null;
 

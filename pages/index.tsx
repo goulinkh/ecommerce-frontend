@@ -1,5 +1,5 @@
 import HomePage from "../components/pages/HomePage";
-import { getAllProducts } from "../utils/products";
+import { getAllProducts, getProductsByCatalogue } from "../utils/products";
 
 export default function Index(props) {
   return <HomePage {...props} />;
@@ -7,10 +7,7 @@ export default function Index(props) {
 
 export async function getStaticProps({ params }) {
   const allProducts = await getAllProducts();
-  const decorationProducts = allProducts.filter((p) =>
-    p.categories.find((c) => !!c.name.match(/décoration/g))
-  );
-
+  const decorationProducts = getProductsByCatalogue(allProducts, "décoration");
   return {
     props: {
       products: allProducts,

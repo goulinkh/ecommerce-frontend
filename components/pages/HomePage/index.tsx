@@ -18,14 +18,14 @@ export default function HomePage({
         <ProductsSlider
           products={products}
           title="Populaire"
-          href="/catalogue/all"
+          href="/catalogue/0"
         />
         <div className="hidden md:block h-96 w-96 absolute -left-72 top-1/3 bg-linear-1 transform rotate-90 rounded-full"></div>
       </div>
       <ProductsSlider
         products={decorationProducts}
         title="Libérer l'esprit"
-        href="/catalogue/all"
+        href="/catalogue/0"
       />
       <ContactUs />
     </Layout>

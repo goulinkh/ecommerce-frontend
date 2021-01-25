@@ -3,13 +3,31 @@ import Image from "next/image";
 import Link from "next/link";
 import { Product } from "../../utils/types";
 import CartEmptySVG from "../../public/icons/cart-empty.svg";
+import cls from "classnames";
 
-export default function ProductCard({ product }: { product: Product }) {
+export default function ProductCard({
+  product,
+  variant = "card",
+  className,
+}: {
+  product: Product;
+  variant?: "card" | "transparent";
+  className?: string;
+}) {
   const enStock = !!product.quantite;
   return (
     <motion.div>
       <Link href={`/products/${product.id}`}>
-        <div className="relative w-52 rounded-lg bg-white shadow-md cursor-pointer  overflow-hidden ">
+        <div
+          className={cls(
+            className,
+            "relative  cursor-pointer  overflow-hidden ",
+            {
+              "w-52 rounded-lg bg-white shadow-md": variant === "card",
+              "w-full bg-transparent": variant === "transparent",
+            }
+          )}
+        >
           <div className="w-full flex flex-col items-start justify-center">
             <div className="relative w-full h-52  overflow-h rounded">
               <Image

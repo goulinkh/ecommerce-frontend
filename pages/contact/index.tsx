@@ -5,7 +5,7 @@ import Map from "./Map";
 import Navbar from "./Navbar";
 import SocialLinks from "./SocialLinks";
 
-export default function Category() {
+export default function Catalogue() {
   return (
     <Layout footer={false} navbar={false}>
       <Navbar />

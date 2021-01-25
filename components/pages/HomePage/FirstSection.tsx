@@ -6,7 +6,7 @@ import Button from "../../Button";
 import Container from "../../Container";
 
 const Lamps = () => (
-  <div className="absolute top-0 right-36 z-10">
+  <div className="absolute top-0 right-44 xl:right-72 z-10">
     <div className="relative w-0 md:w-64 xl:w-80 h-auto">
       <Image src="/images/lamps.png" width="362" height="296" />
     </div>

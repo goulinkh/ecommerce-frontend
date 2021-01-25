@@ -8,7 +8,7 @@ export type Product = {
   created_at: Date;
   updated_at: Date;
   promotion?: Promotion;
-  categories?: Category[];
+  categories?: Catalogue[];
   media: Media[];
 };
 export type Media = {
@@ -39,11 +39,9 @@ export type Media = {
   // Calculé dans parseMedia
   type: "image" | "video" | "unsupported";
 };
-export type Category = {
+export type Catalogue = {
   id: number;
   name: string;
-  created_at: Date;
-  updated_at: Date;
   produits: Product[];
 };
 
@@ -52,7 +50,5 @@ export type Promotion = {
   new_price: number | null;
   substract_price: number | null;
   percantage_reduction: number | null;
-  published_at: Date;
-  updated_at: Date;
   produits: Product[];
 };

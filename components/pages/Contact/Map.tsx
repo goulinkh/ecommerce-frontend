@@ -1,11 +1,11 @@
 import GoogleMapReact from "google-map-react";
-import MapMarkerSVG from "../../public/icons/map-marker.svg";
+import MapMarkerSVG from "../../../public/icons/map-marker.svg";
 
 const Marker = (props) => (
   <MapMarkerSVG className="w-10 h-auto" lat={props.lat} lng={props.lng} />
 );
 
-export default function Map({
+export default function ContactMap({
   className,
   children,
 }: {

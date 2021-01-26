@@ -1,13 +1,10 @@
-import { motion } from "framer-motion";
-import Button from "../../components/Button";
-import makeAnimatedSeriesDiv from "../../components/makeAnimatedSeriesDiv";
-import Select from "../../components/Select";
-import SendSVG from "../../public/icons/send.svg";
-
-let delayOrderIndex = 0;
-const AnimatedDiv = makeAnimatedSeriesDiv();
+import Button from "../../Button";
+import makeAnimatedSeriesDiv from "../../makeAnimatedSeriesDiv";
+import SendSVG from "../../../public/icons/send.svg";
+import Select from "../../Select";
 
 export default function ContactForm() {
+  const AnimatedDiv = makeAnimatedSeriesDiv();
   return (
     <section className="md:w-1/2 lg:w-1/3 z-10 flex flex-col items-start justify-center space-y-12 px-10">
       <AnimatedDiv className="flex flex-col justify-start w-full space-y-5">

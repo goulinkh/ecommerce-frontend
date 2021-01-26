@@ -1,15 +1,13 @@
 import { GetStaticPropsResult } from "next";
-import Container from "../../../components/Container";
-import Layout from "../../../components/Layout";
-import ProductCard from "../../../components/ProductCard";
-import { getAllCatalogues } from "../../../utils/catalogues";
-import {
-  getAllProducts,
-  getProductsByCatalogue,
-} from "../../../utils/products";
-import { Catalogue as C, Product } from "../../../utils/types";
-import CoverPhoto from "../../../components/pages/Catalogue/CoverPhoto";
-import NavTools from "../../../components/pages/Catalogue/NavTools";
+import { useRouter } from "next/router";
+import Container from "../../components/Container";
+import Layout from "../../components/Layout";
+import CoverPhoto from "../../components/pages/Catalogue/CoverPhoto";
+import NavTools from "../../components/pages/Catalogue/NavTools";
+import ProductCard from "../../components/ProductCard";
+import { getAllCatalogues } from "../../utils/catalogues";
+import { getAllProducts, getProductsByCatalogue } from "../../utils/products";
+import { Catalogue as C, Product } from "../../utils/types";
 
 type props = {
   products: Product[];
@@ -22,6 +20,10 @@ export default function Catalogue({
   catalogue,
   allCatalogues,
 }: props) {
+  const router = useRouter();
+  if (router.isFallback) {
+    return <></>;
+  }
   return (
     <Layout navbarOverlap>
       {/* cover */}
@@ -64,6 +66,7 @@ export async function getStaticProps({
       catalogue,
       allCatalogues,
     },
+    revalidate: 10, // refresh on request at least every 10 seconds
   };
 }
 
@@ -76,6 +79,6 @@ export async function getStaticPaths() {
       })),
       { params: { id: "0" } },
     ],
-    fallback: false, // Will return 404 if id doesn't exist in the list
+    fallback: "blocking",
   };
 }

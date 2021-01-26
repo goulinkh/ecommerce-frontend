@@ -1,19 +1,27 @@
+import { GetStaticPropsResult } from "next";
+import { useRouter } from "next/router";
 import Button from "../../components/Button";
 import Container from "../../components/Container";
 import Layout from "../../components/Layout";
 import ProductImages from "../../components/pages/ProductPage/Images";
 import Select from "../../components/Select";
+import BellSVG from "../../public/icons/bell.svg";
 import CartAddSVG from "../../public/icons/cart-add.svg";
+import CartEmptySVG from "../../public/icons/cart-empty.svg";
+import EmailSVG from "../../public/icons/email.svg";
 import FullStarSVG from "../../public/icons/full-star.svg";
 import HalfStarSVG from "../../public/icons/half-star.svg";
-import BellSVG from "../../public/icons/bell.svg";
-import EmailSVG from "../../public/icons/email.svg";
-import EmptyCartSVG from "../../public/icons/cart-empty.svg";
 import { getAllProducts } from "../../utils/products";
 import { Product as P } from "../../utils/types";
-import  CartEmptySVG from '../../public/icons/cart-empty.svg'
 
-export default function Product({ product }: { product: P }) {
+type props = { product: P };
+
+export default function Product({ product }: props) {
+  const router = useRouter();
+  if (router.isFallback) {
+    return <h1></h1>;
+  }
+
   const enStock = !!product.quantite;
   return (
     <Layout>
@@ -95,13 +103,16 @@ const NoStockSection = () => (
     </Button>
   </div>
 );
-export async function getStaticProps({ params }) {
+export async function getStaticProps({
+  params,
+}): Promise<GetStaticPropsResult<props>> {
   const allProducts = await getAllProducts();
 
   return {
     props: {
       product: allProducts.find((p) => p.id == params.id),
     }, // will be passed to the page component as props
+    revalidate: 1, // refresh data on request at least every second
   };
 }
 
@@ -111,6 +122,6 @@ export async function getStaticPaths() {
     paths: allProducts.map((product) => ({
       params: { id: String(product.id) },
     })),
-    fallback: false, // Will return 404 if id doesn't exist in the list
+    fallback: "blocking",
   };
 }

@@ -1,8 +1,8 @@
 import cls from "classnames";
-import Container from "../../components/Container";
-import Logo from "../../components/Logo";
+import Container from "../../Container";
+import Logo from "../../Logo";
 
-export default function Navbar() {
+export default function ContactNavbar() {
   return (
     <nav
       className={cls(

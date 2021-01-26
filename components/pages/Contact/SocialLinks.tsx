@@ -1,7 +1,7 @@
 import Link from "next/link";
-import Facebook from "../../public/icons/facebook.svg";
-import Instagram from "../../public/icons/instagram.svg";
-import Twitter from "../../public/icons/twitter.svg";
+import Facebook from "../../../public/icons/facebook.svg";
+import Instagram from "../../../public/icons/instagram.svg";
+import Twitter from "../../../public/icons/twitter.svg";
 import cls from "classnames";
 export default function SocialLinks({ className }: { className?: string }) {
   return (

@@ -8,8 +8,8 @@ import {
   getProductsByCatalogue,
 } from "../../../utils/products";
 import { Catalogue as C, Product } from "../../../utils/types";
-import CoverPhoto from "./CoverPhoto";
-import NavTools from "./NavTools";
+import CoverPhoto from "../../../components/pages/Catalogue/CoverPhoto";
+import NavTools from "../../../components/pages/Catalogue/NavTools";
 
 type props = {
   products: Product[];

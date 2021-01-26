@@ -1,0 +1,38 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the action will run. 
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ "**" ]
+  pull_request:
+    branches: [ "**" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    runs-on: self-hosted
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - uses: actions/checkout@v2
+      # Runs a set of commands using the runners shell
+      - name: Build Static pages
+        run: docker build -t ecommerce-frontend .
+  deployment:
+    needs: [build]
+    runs-on: self-hosted    
+    steps:
+      - name: Stop old container
+        run: |
+          docker container stop ecommerce-frontend || true
+          docker container rm ecommerce-frontend || true
+      - name: Start new container
+        run: docker run --name ecommerce-frontend -d -p 3000:3000 ecommerce-frontend 
+      - name: Check status
+        run: wait-for-it -h localhost -p 3000

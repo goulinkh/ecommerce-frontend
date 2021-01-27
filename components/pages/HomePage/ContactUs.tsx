@@ -1,10 +1,10 @@
-import Image from "next/image";
-import Link from "next/link";
-import Button from "../../Button";
-import Container from "../../Container";
-import InViewAnimation from "../../InViewAnimation";
+import Button from 'components/Button';
+import Container from 'components/Container';
+import InViewAnimation from 'components/InViewAnimation';
+import Image from 'next/image';
+import Link from 'next/link';
 
-const ContactUs = () => {
+const ContactUs: React.FC = () => {
   return (
     <Container>
       <InViewAnimation className="flex flex-col md:flex-row w-full h-fit md:h-96 my-32">

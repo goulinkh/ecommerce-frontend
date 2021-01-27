@@ -1,5 +1,5 @@
-import { motion } from "framer-motion";
-import cls from "classnames";
+import { motion } from 'framer-motion';
+import cls from 'classnames';
 
 const Path = (props) => (
   <motion.path
@@ -11,18 +11,24 @@ const Path = (props) => (
   />
 );
 
-export const MenuToggle = ({ toggle, isOpen, className = "" }) => (
+type props = { toggle: any; isOpen: boolean; className?: string };
+
+export const MenuToggle: React.FC<props> = ({
+  toggle,
+  isOpen,
+  className = '',
+}) => (
   <motion.button
     initial={isOpen}
-    animate={isOpen ? "open" : "closed"}
+    animate={isOpen ? 'open' : 'closed'}
     onClick={toggle}
-    className={cls(className, "focus:outline-none ")}
+    className={cls(className, 'focus:outline-none ')}
   >
     <svg className="w-full h-full" viewBox="0 0 23 23">
       <Path
         variants={{
-          closed: { d: "M 2 2.5 L 20 2.5", stroke: "currentColor" },
-          open: { d: "M 3 16.5 L 17 2.5", stroke: "white" },
+          closed: { d: 'M 2 2.5 L 20 2.5', stroke: 'currentColor' },
+          open: { d: 'M 3 16.5 L 17 2.5', stroke: 'white' },
         }}
       />
       <Path
@@ -35,8 +41,8 @@ export const MenuToggle = ({ toggle, isOpen, className = "" }) => (
       />
       <Path
         variants={{
-          closed: { d: "M 2 16.346 L 20 16.346", stroke: "currentColor" },
-          open: { d: "M 3 2.5 L 17 16.346", stroke: "white" },
+          closed: { d: 'M 2 16.346 L 20 16.346', stroke: 'currentColor' },
+          open: { d: 'M 3 2.5 L 17 16.346', stroke: 'white' },
         }}
       />
     </svg>

@@ -1,13 +1,13 @@
-import { GetStaticPropsResult } from "next";
-import { useRouter } from "next/router";
-import Container from "../../components/Container";
-import Layout from "../../components/Layout";
-import CoverPhoto from "../../components/pages/Catalogue/CoverPhoto";
-import NavTools from "../../components/pages/Catalogue/NavTools";
-import ProductCard from "../../components/ProductCard";
-import { getAllCatalogues } from "../../utils/catalogues";
-import { getAllProducts, getProductsByCatalogue } from "../../utils/products";
-import { Catalogue as C, Product } from "../../utils/types";
+import Container from 'components/Container';
+import Layout from 'components/Layout';
+import CoverPhoto from 'components/pages/Catalogue/CoverPhoto';
+import NavTools from 'components/pages/Catalogue/NavTools';
+import ProductCard from 'components/ProductCard';
+import { GetStaticPaths, GetStaticProps } from 'next';
+import { useRouter } from 'next/router';
+import { getAllCatalogues } from 'utils/catalogues';
+import { getAllProducts, getProductsByCatalogue } from 'utils/products';
+import { Catalogue as C, Product } from 'utils/types';
 
 type props = {
   products: Product[];
@@ -15,11 +15,7 @@ type props = {
   allCatalogues: C[];
 };
 
-export default function Catalogue({
-  products,
-  catalogue,
-  allCatalogues,
-}: props) {
+const Catalogue: React.FC<props> = function ({ products, allCatalogues }) {
   const router = useRouter();
   if (router.isFallback) {
     return <></>;
@@ -43,15 +39,17 @@ export default function Catalogue({
       </Container>
     </Layout>
   );
-}
+};
 
-export async function getStaticProps({
+export default Catalogue;
+
+export const getStaticProps: GetStaticProps<props> = async function ({
   params,
-}): Promise<GetStaticPropsResult<props>> {
+}) {
   let allProducts = await getAllProducts();
   const catalogueTout = {
     id: 0,
-    name: "Tout",
+    name: 'Tout',
     produits: allProducts,
   };
   allProducts = allProducts.map((p) => ({
@@ -59,7 +57,7 @@ export async function getStaticProps({
     categories: [...p.categories, catalogueTout],
   }));
   const allCatalogues = [catalogueTout, ...(await getAllCatalogues())];
-  const catalogue = allCatalogues.find((c) => c.id == params.id);
+  const catalogue = allCatalogues.find((c) => String(c.id) == params.id);
   return {
     props: {
       products: getProductsByCatalogue(allProducts || [], catalogue.name),
@@ -68,17 +66,17 @@ export async function getStaticProps({
     },
     revalidate: 10, // refresh on request at least every 10 seconds
   };
-}
+};
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async function () {
   const allCatalogues = await getAllCatalogues();
   return {
     paths: [
       ...allCatalogues.map((catalogue) => ({
         params: { id: String(catalogue.id) },
       })),
-      { params: { id: "0" } },
+      { params: { id: '0' } },
     ],
-    fallback: "blocking",
+    fallback: 'blocking',
   };
-}
+};

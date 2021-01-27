@@ -1,7 +1,8 @@
-import { motion } from "framer-motion";
-import { ReactNode } from "react";
+import { motion } from 'framer-motion';
+import { ReactNode } from 'react';
 
-const AuthFormContainer = ({ children }: { children: ReactNode }) => {
+type props = { children: ReactNode };
+const AuthFormContainer: React.FC<props> = ({ children }) => {
   return (
     <motion.div
       layoutId="auth-form"

@@ -1,18 +1,20 @@
-import { motion } from "framer-motion";
-import Image from "next/image";
-import Link from "next/link";
-import { Product } from "../../utils/types";
-import CartEmptySVG from "../../public/icons/cart-empty.svg";
-import cls from "classnames";
+import cls from 'classnames';
+import { motion } from 'framer-motion';
+import Image from 'next/image';
+import Link from 'next/link';
+import CartEmptySVG from 'public/icons/cart-empty.svg';
+import { Product } from 'utils/types';
 
-export default function ProductCard({
-  product,
-  variant = "card",
-  className,
-}: {
+type props = {
   product: Product;
-  variant?: "card" | "transparent";
+  variant?: 'card' | 'transparent';
   className?: string;
+};
+
+const ProductCard: React.FC<props> = function ({
+  product,
+  variant = 'card',
+  className,
 }) {
   const enStock = !!product.quantite;
   return (
@@ -21,10 +23,10 @@ export default function ProductCard({
         <div
           className={cls(
             className,
-            "relative  cursor-pointer  overflow-hidden ",
+            'relative  cursor-pointer  overflow-hidden ',
             {
-              "w-52 rounded-lg bg-white shadow-md": variant === "card",
-              "w-full bg-transparent": variant === "transparent",
+              'w-52 rounded-lg bg-white shadow-md': variant === 'card',
+              'w-full bg-transparent': variant === 'transparent',
             }
           )}
         >
@@ -57,7 +59,7 @@ export default function ProductCard({
       </Link>
     </motion.div>
   );
-}
+};
 
 function getSalePrice(product: Product) {
   if (!onSale(product)) {
@@ -75,3 +77,5 @@ function getSalePrice(product: Product) {
 function onSale(product: Product) {
   return !!product.promotion;
 }
+
+export default ProductCard;

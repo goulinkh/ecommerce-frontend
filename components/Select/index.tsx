@@ -1,15 +1,9 @@
-import cls from "classnames";
-import { DetailedHTMLProps, SelectHTMLAttributes } from "react";
-import styles from "./select.module.css";
-export default function Select({
-  variant = "gradient",
-  bg = "white",
-  children,
-  className = "",
-  innerClassName = "",
-  ...props
-}: {
-  variant?: "gradient" | "no-border" | "none";
+import cls from 'classnames';
+import { DetailedHTMLProps, SelectHTMLAttributes } from 'react';
+import styles from './select.module.css';
+
+type props = {
+  variant?: 'gradient' | 'no-border' | 'none';
   bg?: string;
   className?: string;
   innerClassName?: string;
@@ -17,12 +11,21 @@ export default function Select({
 } & DetailedHTMLProps<
   SelectHTMLAttributes<HTMLSelectElement>,
   HTMLSelectElement
->) {
+>;
+
+const Select: React.FC<props> = function ({
+  variant = 'gradient',
+  bg = 'white',
+  children,
+  className = '',
+  innerClassName = '',
+  ...props
+}) {
   return (
     <div
-      className={cls("h-fit rounded", className, {
-        [`bg-linear-1 ${styles.container}`]: variant === "gradient",
-        "border-none": variant === "no-border",
+      className={cls('h-fit rounded', className, {
+        [`bg-linear-1 ${styles.container}`]: variant === 'gradient',
+        'border-none': variant === 'no-border',
       })}
     >
       <select
@@ -38,4 +41,6 @@ export default function Select({
       </select>
     </div>
   );
-}
+};
+
+export default Select;

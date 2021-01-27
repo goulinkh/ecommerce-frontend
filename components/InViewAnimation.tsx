@@ -1,20 +1,19 @@
-import { motion, useAnimation } from "framer-motion";
-import { useEffect } from "react";
-import { useInView } from "react-intersection-observer";
+import { motion, useAnimation } from 'framer-motion';
+import { useEffect } from 'react';
+import { useInView } from 'react-intersection-observer';
 
-function InViewAnimation({
-  children,
-  className,
-}: {
+type props = {
   children: React.ReactNode;
   className?: string;
-}) {
+};
+
+const InViewAnimation: React.FC<props> = function ({ children, className }) {
   // https://stackoverflow.com/questions/58958972/framer-motion-animate-when-element-is-in-view-when-you-scroll-to-element
   const controls = useAnimation();
   const [ref, inView] = useInView({ threshold: 0.2 });
   useEffect(() => {
     if (inView) {
-      controls.start("visible");
+      controls.start('visible');
     }
   }, [controls, inView]);
 
@@ -33,6 +32,6 @@ function InViewAnimation({
       {children}
     </motion.div>
   );
-}
+};
 
 export default InViewAnimation;

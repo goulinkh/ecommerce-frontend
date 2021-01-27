@@ -1,10 +1,12 @@
-import { AnimateSharedLayout } from "framer-motion";
-import "../styles/global.css";
+import { AnimateSharedLayout } from 'framer-motion';
+import { AppType } from 'next/dist/next-server/lib/utils';
+import 'styles/global.css';
 
-export default function App({ Component, pageProps }) {
+const App: AppType = function ({ Component, pageProps }) {
   return (
     <AnimateSharedLayout>
       <Component {...pageProps} />
     </AnimateSharedLayout>
   );
-}
+};
+export default App;

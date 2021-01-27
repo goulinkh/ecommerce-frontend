@@ -1,19 +1,27 @@
-import { useRouter } from "next/router";
-import HomePage from "../components/pages/HomePage";
-import { getAllProducts, getProductsByCatalogue } from "../utils/products";
+import HomePage from 'components/pages/HomePage';
+import { GetStaticProps } from 'next';
+import { useRouter } from 'next/router';
+import { getAllProducts, getProductsByCatalogue } from 'utils/products';
+import { Product } from 'utils/types';
 
-export default function Index(props) {
+type props = {
+  products: Product[];
+  decorationProducts: Product[];
+};
+
+const Index: React.FC<props> = function (props) {
   const router = useRouter();
   if (router.isFallback) {
     return <></>;
   }
   return <HomePage {...props} />;
-}
+};
 
-export async function getStaticProps({ params }) {
+export default Index;
 
+export const getStaticProps: GetStaticProps<props> = async function getStaticProps() {
   const allProducts = await getAllProducts();
-  const decorationProducts = getProductsByCatalogue(allProducts, "décoration");
+  const decorationProducts = getProductsByCatalogue(allProducts, 'décoration');
   return {
     props: {
       products: allProducts,
@@ -21,4 +29,4 @@ export async function getStaticProps({ params }) {
     }, // will be passed to the page component as props
     revalidate: 10,
   };
-}
+};

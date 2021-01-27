@@ -1,19 +1,22 @@
-import cls from "classnames";
-import Image from "next/image";
-import { ReactNode, useEffect, useState } from "react";
-import MinusSVG from "../../../public/icons/minus.svg";
-import PlusSVG from "../../../public/icons/plus.svg";
-import { Media } from "../../../utils/types";
+import cls from 'classnames';
+import Image from 'next/image';
+import MinusSVG from 'public/icons/minus.svg';
+import PlusSVG from 'public/icons/plus.svg';
+import { ReactNode, useState } from 'react';
+import { Media } from 'utils/types';
+
+type props = { medias: Media[] };
 
 // TODO: make ProductVideo
-export default function ProductImages({ medias }: { medias: Media[] }) {
+const ProductImages: React.FC<props> = function ({ medias }) {
   const [previousMainMediaIndex, setPreviousMainMediaIndex] = useState(0);
   const [currentMainMediaIndex, setCurrentMainMediaIndex] = useState(0);
-  useEffect(() => {
-    setPreviousMainMediaIndex(previousMainMediaIndex);
-  }, [currentMainMediaIndex]);
+  const updateMainMediaIndex = (newIndex) => {
+    setPreviousMainMediaIndex(currentMainMediaIndex);
+    setCurrentMainMediaIndex(newIndex);
+  };
   const onMediaClick = (index) => {
-    setCurrentMainMediaIndex(index);
+    updateMainMediaIndex(index);
     setPreviousMainMediaIndex(index);
   };
   return (
@@ -31,15 +34,17 @@ export default function ProductImages({ medias }: { medias: Media[] }) {
             image={image}
             onClick={() => onMediaClick(i)}
             onHover={{
-              on: () => setCurrentMainMediaIndex(i),
-              off: () => setCurrentMainMediaIndex(previousMainMediaIndex),
+              on: () => updateMainMediaIndex(i),
+              off: () => updateMainMediaIndex(previousMainMediaIndex),
             }}
           />
         ))}
       </div>
     </div>
   );
-}
+};
+
+export default ProductImages;
 
 const ProductImage = ({
   image,
@@ -52,7 +57,7 @@ const ProductImage = ({
 }: {
   image: Media;
   className?: string;
-  size: "small" | "big";
+  size: 'small' | 'big';
   onClick?: any;
   onHover?: { on: any; off: any };
   children?: ReactNode;
@@ -62,16 +67,18 @@ const ProductImage = ({
     <div
       className={cls(
         className,
-        "relative overflow-hidden transition-all rounded",
+        'relative overflow-hidden transition-all rounded',
         {
-          "h-full w-20 cursor-pointer": size === "small",
+          'h-full w-20 cursor-pointer': size === 'small',
         },
-        { "w-full h-full": size === "big" },
-        { "border border-gray-600": active }
+        { 'w-full h-full': size === 'big' },
+        { 'border border-gray-600': active }
       )}
       onClick={() => onClick && onClick()}
       onMouseEnter={() => onHover?.on()}
       onMouseLeave={() => onHover?.off()}
+      role="button"
+      aria-hidden
     >
       <Image objectFit="contain" layout="fill" src={image.url} />
       {children}
@@ -79,7 +86,8 @@ const ProductImage = ({
   );
 };
 
-const ZoomControls = () => (
+// eslint-disable-next-line
+const ZoomControls: React.FC = () => (
   <div className="absolute bottom-6 right-6 flex flex-row space-x-2">
     <MinusSVG className="w-8 h-8 text-gray-500" />
     <PlusSVG className="w-8 h-8 text-black cursor-pointer" />

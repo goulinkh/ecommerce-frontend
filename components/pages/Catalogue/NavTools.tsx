@@ -1,7 +1,8 @@
-import ActiveLink from "../../ActiveLink";
-import { Catalogue } from "../../../utils/types";
+import ActiveLink from 'components/ActiveLink';
+import { Catalogue } from 'utils/types';
 
-const NavTools = ({ allCatalogues }: { allCatalogues: Catalogue[] }) => {
+type props = { allCatalogues: Catalogue[] };
+const NavTools: React.FC<props> = ({ allCatalogues }) => {
   const formatCatalogueName = (name) =>
     `${name[0].toUpperCase()}${name.substr(1)}`;
 
@@ -44,6 +45,8 @@ const NavTools = ({ allCatalogues }: { allCatalogues: Catalogue[] }) => {
   );
 };
 
+export default NavTools;
+
 const SubSectionContainer = ({ children }) => (
   <div className="flex flex-col space-y-5">{children}</div>
 );
@@ -54,4 +57,3 @@ const SubSectionTitle = ({ text }) => (
 const SubSectionItemContainer = ({ children }) => (
   <div className="flex flex-col space-y-3">{children}</div>
 );
-export default NavTools;

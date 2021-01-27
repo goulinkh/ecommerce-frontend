@@ -6,9 +6,7 @@ COPY --chown=node:node . ${WORKDIR}
 WORKDIR ${WORKDIR}
 RUN yarn install 
 
-
-ENV NODE_ENV=production
 RUN yarn build
 
 EXPOSE 3000
-CMD yarn start
+CMD NODE_ENV=production yarn start

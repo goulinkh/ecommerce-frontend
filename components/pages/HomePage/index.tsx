@@ -1,16 +1,15 @@
-import { Product } from "../../../utils/types";
-import Layout from "../../Layout";
-import ContactUs from "./ContactUs";
-import FirstSection from "./FirstSection";
-import ProductsSlider from "./ProductsSlider";
+import Layout from 'components/Layout';
+import { Product } from 'utils/types';
+import ContactUs from './ContactUs';
+import FirstSection from './FirstSection';
+import ProductsSlider from './ProductsSlider';
 
-export default function HomePage({
-  products,
-  decorationProducts,
-}: {
+type props = {
   products: Product[];
   decorationProducts: Product[];
-}) {
+};
+
+const HomePage: React.FC<props> = function ({ products, decorationProducts }) {
   return (
     <Layout navbarOverlap title="Page d'accueil">
       <FirstSection />
@@ -30,4 +29,5 @@ export default function HomePage({
       <ContactUs />
     </Layout>
   );
-}
+};
+export default HomePage;

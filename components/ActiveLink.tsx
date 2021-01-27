@@ -1,13 +1,22 @@
-import Link from "next/link";
-import { useRouter } from "next/router";
-import React, { Children } from "react";
-import cls from "classnames";
+import cls from 'classnames';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import React from 'react';
 
-const ActiveLink = ({
+type props = {
+  children: React.ReactNode;
+  className?: string;
+  activeClassName?: string;
+  inactiveClassName?: string;
+  href: string;
+  regex?: RegExp;
+};
+
+const ActiveLink: React.FC<props> = ({
   children,
-  activeClassName = "",
-  inactiveClassName = "",
-  className = "",
+  activeClassName = '',
+  inactiveClassName = '',
+  className = '',
   href,
   regex = null,
   ...props
@@ -19,7 +28,7 @@ const ActiveLink = ({
     <Link href={href} {...props}>
       <span
         className={cls(
-          "cursor-pointer",
+          'cursor-pointer',
           {
             [`${activeClassName}`]: isActive,
             [`${inactiveClassName}`]: !isActive,

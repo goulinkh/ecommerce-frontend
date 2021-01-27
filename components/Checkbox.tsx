@@ -1,18 +1,17 @@
-import { DetailedHTMLProps, InputHTMLAttributes, useState } from "react";
+import { DetailedHTMLProps, InputHTMLAttributes, useState } from 'react';
 
-export default function Checkbox({
+type props = {
+  id?: string;
+  children: React.ReactNode;
+  isChecked?: boolean;
+} & DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
+
+const Checkbox: React.FC<props> = function ({
   id,
   children,
   isChecked = false,
   ...props
-}: {
-  id?: string;
-  children: React.ReactNode;
-  isChecked?: boolean;
-} & DetailedHTMLProps<
-  InputHTMLAttributes<HTMLInputElement>,
-  HTMLInputElement
->) {
+}) {
   const [checked, setChecked] = useState(isChecked);
   const onLabelClick = (e) => {
     e.preventDefault();
@@ -32,9 +31,18 @@ export default function Checkbox({
         {...props}
         className="form-checkbox text-blue-400 h-6 w-6 rounded border border-gray-300"
       />
-      <label htmlFor={id} onClick={onLabelClick} className="select-none">
+      <label
+        htmlFor={id}
+        onClick={onLabelClick}
+        className="select-none"
+        // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
+        role="button"
+        aria-hidden
+      >
         {children}
       </label>
     </div>
   );
-}
+};
+
+export default Checkbox;

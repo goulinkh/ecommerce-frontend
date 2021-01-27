@@ -1,6 +1,6 @@
-import Link from "next/link";
+import Link from 'next/link';
 
-const AuthGreetingMessage = () => (
+const AuthGreetingMessage: React.FC = () => (
   <div className="flex flex-col justify-center space-y-5 pt-8 md:pt-0">
     <h1 className="text-xl font-bold">
       Bienvenue à

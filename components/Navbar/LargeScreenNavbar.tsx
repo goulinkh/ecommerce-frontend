@@ -1,18 +1,19 @@
-import cls from "classnames";
-import Link from "next/link";
-import { navItems } from ".";
-import CartLogo from "../../public/icons/cart.svg";
-import UserLogo from "../../public/icons/user.svg";
-import ActiveLink from "../ActiveLink";
-import Container from "../Container";
-import Logo from "../Logo";
+import cls from 'classnames';
+import ActiveLink from 'components/ActiveLink';
+import Container from 'components/Container';
+import Logo from 'components/Logo';
+import Link from 'next/link';
+import CartLogo from 'public/icons/cart.svg';
+import UserLogo from 'public/icons/user.svg';
+import { navItems } from '.';
 
-export default function LargeScreenNavbar({ className = "" }) {
+type props = { className?: string };
+const LargeScreenNavbar: React.FC<props> = function ({ className = '' }) {
   return (
     <Container
       className={cls(
         className,
-        " flex flex-row justify-between items-center py-5"
+        ' flex flex-row justify-between items-center py-5'
       )}
     >
       <div className="flex flex-row justify-between items-center">
@@ -46,4 +47,6 @@ export default function LargeScreenNavbar({ className = "" }) {
       </div>
     </Container>
   );
-}
+};
+
+export default LargeScreenNavbar;

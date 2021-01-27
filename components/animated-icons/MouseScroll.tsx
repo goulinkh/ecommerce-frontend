@@ -1,7 +1,10 @@
-import cls from "classnames";
-import { motion } from "framer-motion";
+import cls from 'classnames';
+import { motion } from 'framer-motion';
 
-export default function MouseScroll({ className = "", ...props }) {
+type props = {
+  className?: string;
+} & any;
+const MouseScroll: React.FC<props> = function ({ className = '', ...props }) {
   return (
     <motion.svg
       width="28"
@@ -35,11 +38,13 @@ export default function MouseScroll({ className = "", ...props }) {
         }}
         transition={{
           duration: 2,
-          ease: "easeInOut",
+          ease: 'easeInOut',
           repeat: Infinity,
           repeatDelay: 0.5,
         }}
       />
     </motion.svg>
   );
-}
+};
+
+export default MouseScroll;

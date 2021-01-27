@@ -1,12 +1,12 @@
-import cls from "classnames";
-import Container from "../../Container";
-import Logo from "../../Logo";
+import cls from 'classnames';
+import Container from 'components/Container';
+import Logo from 'components/Logo';
 
-export default function ContactNavbar() {
+const ContactNavbar: React.FC = function () {
   return (
     <nav
       className={cls(
-        "fixed top-0 left-0 w-screen bg-blur bg-white text-base z-20 bg-opacity-50"
+        'fixed top-0 left-0 w-screen bg-blur bg-white text-base z-20 bg-opacity-50'
       )}
     >
       <Container className="h-12 flex items-center">
@@ -14,4 +14,6 @@ export default function ContactNavbar() {
       </Container>
     </nav>
   );
-}
+};
+
+export default ContactNavbar;

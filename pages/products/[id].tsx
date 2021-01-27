@@ -1,25 +1,25 @@
-import { GetStaticPropsResult } from "next";
-import { useRouter } from "next/router";
-import Button from "../../components/Button";
-import Container from "../../components/Container";
-import Layout from "../../components/Layout";
-import ProductImages from "../../components/pages/ProductPage/Images";
-import Select from "../../components/Select";
-import BellSVG from "../../public/icons/bell.svg";
-import CartAddSVG from "../../public/icons/cart-add.svg";
-import CartEmptySVG from "../../public/icons/cart-empty.svg";
-import EmailSVG from "../../public/icons/email.svg";
-import FullStarSVG from "../../public/icons/full-star.svg";
-import HalfStarSVG from "../../public/icons/half-star.svg";
-import { getAllProducts } from "../../utils/products";
-import { Product as P } from "../../utils/types";
+import Button from 'components/Button';
+import Container from 'components/Container';
+import Layout from 'components/Layout';
+import ProductImages from 'components/pages/ProductPage/Images';
+import Select from 'components/Select';
+import { GetStaticPaths, GetStaticProps, GetStaticPropsResult } from 'next';
+import { useRouter } from 'next/router';
+import BellSVG from 'public/icons/bell.svg';
+import CartAddSVG from 'public/icons/cart-add.svg';
+import CartEmptySVG from 'public/icons/cart-empty.svg';
+import EmailSVG from 'public/icons/email.svg';
+import FullStarSVG from 'public/icons/full-star.svg';
+import HalfStarSVG from 'public/icons/half-star.svg';
+import { getAllProducts } from 'utils/products';
+import { Product as P } from 'utils/types';
 
 type props = { product: P };
 
-export default function Product({ product }: props) {
+const Product: React.FC<props> = function ({ product }) {
   const router = useRouter();
   if (router.isFallback) {
-    return <h1></h1>;
+    return <></>;
   }
 
   const enStock = !!product.quantite;
@@ -44,11 +44,11 @@ export default function Product({ product }: props) {
             {enStock ? <AddToCartSection /> : <NoStockSection />}
             <h2 className="text-xl font-bold">Description</h2>
             <p className="overflow-ellipsis overflow-hidden w-full prose">
-              {product.descriptionSummary.split(/\s/).slice(0, 30).join(" ")}
+              {product.descriptionSummary.split(/\s/).slice(0, 30).join(' ')}
               ...
               <a
                 href="#description"
-                style={{ textDecoration: "none !important" }}
+                style={{ textDecoration: 'none !important' }}
                 className="ml-4"
               >
                 <span className="text-blue-400 font-bold cursor-pointer">
@@ -70,7 +70,7 @@ export default function Product({ product }: props) {
       </Container>
     </Layout>
   );
-}
+};
 
 const AddToCartSection = () => (
   <div className="w-full flex flex-row items-center space-x-3 pb-6">
@@ -103,25 +103,27 @@ const NoStockSection = () => (
     </Button>
   </div>
 );
-export async function getStaticProps({
+export const getStaticProps: GetStaticProps = async ({
   params,
-}): Promise<GetStaticPropsResult<props>> {
+}): Promise<GetStaticPropsResult<props>> => {
   const allProducts = await getAllProducts();
 
   return {
     props: {
-      product: allProducts.find((p) => p.id == params.id),
+      product: allProducts.find((p) => String(p.id) == params.id),
     }, // will be passed to the page component as props
     revalidate: 1, // refresh data on request at least every second
   };
-}
+};
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
   const allProducts = await getAllProducts();
   return {
     paths: allProducts.map((product) => ({
       params: { id: String(product.id) },
     })),
-    fallback: "blocking",
+    fallback: 'blocking',
   };
-}
+};
+
+export default Product;

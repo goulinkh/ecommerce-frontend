@@ -37,7 +37,7 @@ export type Media = {
   created_at: Date;
   updated_at: Date;
   // Calculé dans parseMedia
-  type: "image" | "video" | "unsupported";
+  type: 'image' | 'video' | 'unsupported';
 };
 export type Catalogue = {
   id: number;

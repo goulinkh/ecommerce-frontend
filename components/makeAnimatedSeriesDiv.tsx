@@ -1,8 +1,8 @@
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion';
 
-const makeAnimatedSeriesDiv = () => {
+const makeAnimatedSeriesDiv: () => React.FC<any> = () => {
   let delayOrderIndex = 0;
-  return ({ children, ...props }) => {
+  const AnimatedSeriesDiv = ({ children, ...props }) => {
     const delayBetweenAnimations = 0.1;
     // ease out effect
     const delay =
@@ -32,6 +32,7 @@ const makeAnimatedSeriesDiv = () => {
       </motion.div>
     );
   };
+  return AnimatedSeriesDiv;
 };
 
 export default makeAnimatedSeriesDiv;

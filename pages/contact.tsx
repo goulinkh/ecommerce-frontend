@@ -1,11 +1,11 @@
-import PagePatternSplitterSVG from "../public/icons/page-pattern-splitter.svg";
-import Layout from "../components/Layout";
-import ContactForm from "../components/pages/Contact/ContactForm";
-import ContactMap from "../components/pages/Contact/Map";
-import ContactNavbar from "../components/pages/Contact/Navbar";
-import SocialLinks from "../components/pages/Contact/SocialLinks";
+import Layout from 'components/Layout';
+import ContactForm from 'components/pages/Contact/ContactForm';
+import ContactMap from 'components/pages/Contact/Map';
+import ContactNavbar from 'components/pages/Contact/Navbar';
+import SocialLinks from 'components/pages/Contact/SocialLinks';
+import PagePatternSplitterSVG from 'public/icons/page-pattern-splitter.svg';
 
-export default function Catalogue() {
+const Catalogue: React.FC = function () {
   return (
     <Layout footer={false} navbar={false}>
       <ContactNavbar />
@@ -18,4 +18,6 @@ export default function Catalogue() {
       </div>
     </Layout>
   );
-}
+};
+
+export default Catalogue;

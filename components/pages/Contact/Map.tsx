@@ -1,17 +1,15 @@
-import GoogleMapReact from "google-map-react";
-import MapMarkerSVG from "../../../public/icons/map-marker.svg";
+import GoogleMapReact from 'google-map-react';
+import MapMarkerSVG from 'public/icons/map-marker.svg';
 
 const Marker = (props) => (
   <MapMarkerSVG className="w-10 h-auto" lat={props.lat} lng={props.lng} />
 );
-
-export default function ContactMap({
-  className,
-  children,
-}: {
+type props = {
   className?: string;
   children: React.ReactNode;
-}) {
+};
+
+const ContactMap: React.FC<props> = function ({ className, children }) {
   const address = {
     center: {
       lat: 43.6004975,
@@ -24,7 +22,7 @@ export default function ContactMap({
     // Important! Always set the container height explicitly
     <div className={className}>
       <GoogleMapReact
-        bootstrapURLKeys={{ key: "AIzaSyDAHcAXUHrC3O-ZuCVWSqR2omIgwfRhzXo" }}
+        bootstrapURLKeys={{ key: 'AIzaSyDAHcAXUHrC3O-ZuCVWSqR2omIgwfRhzXo' }}
         defaultCenter={address.center}
         defaultZoom={address.zoom}
       >
@@ -33,4 +31,6 @@ export default function ContactMap({
       {children}
     </div>
   );
-}
+};
+
+export default ContactMap;

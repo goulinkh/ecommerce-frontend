@@ -1,11 +1,11 @@
-import Link from "next/link";
-import Facebook from "../../public/icons/facebook.svg";
-import Instagram from "../../public/icons/instagram.svg";
-import Twitter from "../../public/icons/twitter.svg";
-import Container from "../Container";
-import Logo from "../Logo";
+import Link from 'next/link';
+import Facebook from 'public/icons/facebook.svg';
+import Instagram from 'public/icons/instagram.svg';
+import Twitter from 'public/icons/twitter.svg';
+import Container from 'components/Container';
+import Logo from 'components/Logo';
 
-export default function Footer() {
+const Footer: React.FC = function () {
   return (
     <div className="bg-gray-800 text-gray-300 py-8">
       <Container className="flex flex-col justify-evenly space-y-10">
@@ -18,7 +18,7 @@ export default function Footer() {
 
             <Link href="/#">Livraison & retour</Link>
 
-            <Link href="/#">Condition d'utilisation</Link>
+            <Link href="/#">Condition d&apos;utilisation</Link>
           </div>
           <div className="flex flex-col justify-start space-y-2 md:space-y-5">
             <div className="font-bold">Adresse</div>
@@ -58,4 +58,6 @@ export default function Footer() {
       </Container>
     </div>
   );
-}
+};
+
+export default Footer;

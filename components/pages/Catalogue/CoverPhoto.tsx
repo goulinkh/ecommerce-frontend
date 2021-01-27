@@ -1,6 +1,6 @@
-import Image from "next/image";
+import Image from 'next/image';
 
-const CoverPhoto = () => (
+const CoverPhoto: React.FC = () => (
   <div className="relative w-screen h-80">
     <Image
       objectFit="cover"

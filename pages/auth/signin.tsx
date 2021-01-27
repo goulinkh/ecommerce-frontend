@@ -1,18 +1,18 @@
-import Link from "next/link";
-import EmailSVG from "../../public/icons/email.svg";
-import KeySVG from "../../public/icons/key.svg";
-import ShowPasswordSVG from "../../public/icons/show-password.svg";
-import Button from "../../components/Button";
-import Checkbox from "../../components/Checkbox";
-import Layout from "../../components/Layout";
-import makeAnimatedSeriesDiv from "../../components/makeAnimatedSeriesDiv";
-import AuthFormContainer from "../../components/pages/Auth/FormContainer";
-import AuthGreetingMessage from "../../components/pages/Auth/GreetingMessage";
-import AuthImageCover from "../../components/pages/Auth/ImageCover";
-import AuthLogo from "../../components/pages/Auth/Logo";
-import TextInput from "../../components/TextInput";
+import Button from 'components/Button';
+import Checkbox from 'components/Checkbox';
+import Layout from 'components/Layout';
+import makeAnimatedSeriesDiv from 'components/makeAnimatedSeriesDiv';
+import AuthFormContainer from 'components/pages/Auth/FormContainer';
+import AuthGreetingMessage from 'components/pages/Auth/GreetingMessage';
+import AuthImageCover from 'components/pages/Auth/ImageCover';
+import AuthLogo from 'components/pages/Auth/Logo';
+import TextInput from 'components/TextInput';
+import Link from 'next/link';
+import EmailSVG from 'public/icons/email.svg';
+import KeySVG from 'public/icons/key.svg';
+import ShowPasswordSVG from 'public/icons/show-password.svg';
 
-export default function SignIn() {
+const SignIn: React.FC = function () {
   const AnimatedDiv = makeAnimatedSeriesDiv();
 
   return (
@@ -73,4 +73,6 @@ export default function SignIn() {
       </div>
     </Layout>
   );
-}
+};
+
+export default SignIn;

@@ -1,10 +1,11 @@
-import { useRouter } from "next/router";
-import Layout from "../components/Layout";
+import Layout from 'components/Layout';
 
-export default function Cart () {
+const Cart: React.FC = function () {
   return (
     <Layout>
       <h1>Cart</h1>
     </Layout>
   );
-}
+};
+
+export default Cart;

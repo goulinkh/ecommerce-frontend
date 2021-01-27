@@ -1,14 +1,14 @@
-import marked from "marked";
-import { parse } from "node-html-parser";
-import config from "../config";
-import { Media, Product } from "./types";
+import marked from 'marked';
+import { parse } from 'node-html-parser';
+import config from 'config';
+import { Media, Product } from './types';
 
 export function getProductsByCatalogue(
   products: Product[],
   catalogueName: string
 ): Product[] {
   return products.filter((p) =>
-    p.categories.find((c) => !!c.name.match(new RegExp(catalogueName, "g")))
+    p.categories.find((c) => !!c.name.match(new RegExp(catalogueName, 'g')))
   );
 }
 
@@ -16,7 +16,7 @@ let cache: Promise<Product[]> = null;
 
 export async function getAllProducts(): Promise<Product[]> {
   if (cache) return cache;
-  const response = await fetch(new URL("/produits", config.strapiURL).href);
+  const response = await fetch(new URL('/produits', config.strapiURL).href);
   if (response.status >= 400) {
     throw new Error(`Strapi Server returned status code ${response.status}`);
   }
@@ -34,9 +34,9 @@ export function parseProduit(p: Product): Product {
 
 function parseMedia(m: Media): Media {
   let type;
-  if (!!m.mime.match(/^image/)) type = "image";
-  if (!!m.mime.match(/^video/)) type = "video";
-  else type = "unsupported";
+  if (m.mime.match(/^image/)) type = 'image';
+  if (m.mime.match(/^video/)) type = 'video';
+  else type = 'unsupported';
   return { ...m, url: cmsURL(m.url), type };
 }
 
@@ -47,13 +47,13 @@ function cmsURL(url: string) {
 function parseDescription(markdownDescription: string) {
   const html = marked(markdownDescription);
   const root = parse(html);
-  const imgs = root.querySelectorAll("img");
+  const imgs = root.querySelectorAll('img');
   imgs.forEach((img) => {
-    img.setAttribute("src", cmsURL(img.getAttribute("src")));
+    img.setAttribute('src', cmsURL(img.getAttribute('src')));
   });
   const descriptionSummary = root
-    .querySelectorAll("p")
+    .querySelectorAll('p')
     .map((e) => e.innerText)
-    .join(" ");
+    .join(' ');
   return { description: root.toString(), descriptionSummary };
 }

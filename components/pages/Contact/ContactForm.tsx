@@ -1,9 +1,9 @@
-import Button from "../../Button";
-import makeAnimatedSeriesDiv from "../../makeAnimatedSeriesDiv";
-import SendSVG from "../../../public/icons/send.svg";
-import Select from "../../Select";
+import Button from 'components/Button';
+import makeAnimatedSeriesDiv from 'components/makeAnimatedSeriesDiv';
+import Select from 'components/Select';
+import SendSVG from 'public/icons/send.svg';
 
-export default function ContactForm() {
+const ContactForm: React.FC = function () {
   const AnimatedDiv = makeAnimatedSeriesDiv();
   return (
     <section className="md:w-1/2 lg:w-1/3 z-10 flex flex-col items-start justify-center space-y-12 px-10">
@@ -58,4 +58,6 @@ export default function ContactForm() {
       </AnimatedDiv>
     </section>
   );
-}
+};
+
+export default ContactForm;

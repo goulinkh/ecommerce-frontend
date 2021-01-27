@@ -1,11 +1,10 @@
-import { useRouter } from "next/router";
-import Layout from "../components/Layout";
-import Navbar from "../components/Navbar";
+import Layout from 'components/Layout';
 
-export default function Nouveaute() {
+const Nouveaute: React.FC = function () {
   return (
     <Layout>
       <h1>Nouveauté</h1>
     </Layout>
   );
-}
+};
+export default Nouveaute;

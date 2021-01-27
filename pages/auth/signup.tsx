@@ -1,18 +1,19 @@
-import Link from "next/link";
-import Button from "../../components/Button";
-import Checkbox from "../../components/Checkbox";
-import Layout from "../../components/Layout";
-import makeAnimatedSeriesDiv from "../../components/makeAnimatedSeriesDiv";
-import AuthFormContainer from "../../components/pages/Auth/FormContainer";
-import AuthGreetingMessage from "../../components/pages/Auth/GreetingMessage";
-import AuthImageCover from "../../components/pages/Auth/ImageCover";
-import AuthLogo from "../../components/pages/Auth/Logo";
-import Select from "../../components/Select";
-import TextInput from "../../components/TextInput";
-import EmailSVG from "../../public/icons/email.svg";
-import KeySVG from "../../public/icons/key.svg";
-import ShowPasswordSVG from "../../public/icons/show-password.svg";
-export default function SignUp() {
+import Button from 'components/Button';
+import Checkbox from 'components/Checkbox';
+import Layout from 'components/Layout';
+import makeAnimatedSeriesDiv from 'components/makeAnimatedSeriesDiv';
+import AuthFormContainer from 'components/pages/Auth/FormContainer';
+import AuthGreetingMessage from 'components/pages/Auth/GreetingMessage';
+import AuthImageCover from 'components/pages/Auth/ImageCover';
+import AuthLogo from 'components/pages/Auth/Logo';
+import Select from 'components/Select';
+import TextInput from 'components/TextInput';
+import Link from 'next/link';
+import EmailSVG from 'public/icons/email.svg';
+import KeySVG from 'public/icons/key.svg';
+import ShowPasswordSVG from 'public/icons/show-password.svg';
+
+const SignUp: React.FC = function () {
   const AnimatedDiv = makeAnimatedSeriesDiv();
   return (
     <Layout navbar={false} footer={false}>
@@ -74,7 +75,7 @@ export default function SignUp() {
           </AnimatedDiv>
           <AnimatedDiv className="w-full flex flex-col space-y-4 items-start justify-between">
             <Checkbox id="email-agreement">
-              en cochant cette case, j'accepte les conditions générales
+              en cochant cette case, j&apos;accepte les conditions générales
             </Checkbox>
             <Checkbox id="email-receive-promotions">
               je souhaite recevoire des offres promotionnelles
@@ -98,4 +99,6 @@ export default function SignUp() {
       </div>
     </Layout>
   );
-}
+};
+
+export default SignUp;

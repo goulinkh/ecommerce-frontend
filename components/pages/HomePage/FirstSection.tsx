@@ -1,11 +1,11 @@
-import { motion } from "framer-motion";
-import Image from "next/image";
-import HomeSphere from "../../../public/icons/home-sphere.svg";
-import MouseScroll from "../../animated-icons/MouseScroll";
-import Button from "../../Button";
-import Container from "../../Container";
+import MouseScroll from 'components/animated-icons/MouseScroll';
+import Button from 'components/Button';
+import Container from 'components/Container';
+import { motion } from 'framer-motion';
+import Image from 'next/image';
+import HomeSphere from 'public/icons/home-sphere.svg';
 
-const Lamps = () => (
+const Lamps: React.FC = () => (
   <div className="absolute top-0 right-44 xl:right-72 z-10">
     <div className="relative w-0 md:w-64 xl:w-80 h-auto">
       <Image src="/images/lamps.png" width="362" height="296" />
@@ -13,7 +13,7 @@ const Lamps = () => (
   </div>
 );
 
-export default function FirstSection() {
+const FirstSection: React.FC = function () {
   return (
     <section className="relative bg-linear-2 md:h-screen w-full">
       <Container className="relative h-full flex flex-col-reverse md:grid md:grid-cols-2 items-center space-y-28 md:space-y-0">
@@ -41,9 +41,9 @@ export default function FirstSection() {
           </h1>
           <p className="text-base leading-loose">
             La nouvelle collection de meubles allie la fonctionnalité et le
-            beauté. Comme d'habitude, le mobilier est fait de matériaux
-            respectueux de l'environnement aux couleurs apaisantes. La nouvelle
-            collection apporte du confort à votre maison.
+            beauté. Comme d&apos;habitude, le mobilier est fait de matériaux
+            respectueux de l&apos;environnement aux couleurs apaisantes. La
+            nouvelle collection apporte du confort à votre maison.
           </p>
           <div className="flex justify-center items-center w-full">
             <Button fill="primary">Découvrir</Button>
@@ -81,9 +81,11 @@ export default function FirstSection() {
       <MouseScroll
         className="hidden md:block absolute bottom-9 left-1/2 text-gray-700"
         style={{
-          transform: "translateX(-50%)",
+          transform: 'translateX(-50%)',
         }}
       />
     </section>
   );
-}
+};
+
+export default FirstSection;

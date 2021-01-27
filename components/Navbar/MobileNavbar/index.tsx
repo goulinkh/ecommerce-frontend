@@ -1,51 +1,23 @@
-import cls from "classnames";
-import { motion, useCycle, Variants } from "framer-motion";
-import Link from "next/link";
-import { navItems } from "..";
-import CartLogo from "../../../public/icons/cart.svg";
-import UserLogo from "../../../public/icons/user.svg";
-import ActiveLink from "../../ActiveLink";
-import Container from "../../Container";
-import Logo from "../../Logo";
-import { MenuToggle } from "./MenuToggle";
+import cls from 'classnames';
+import ActiveLink from 'components/ActiveLink';
+import Container from 'components/Container';
+import Logo from 'components/Logo';
+import { motion, useCycle, Variants } from 'framer-motion';
+import Link from 'next/link';
+import CartLogo from 'public/icons/cart.svg';
+import UserLogo from 'public/icons/user.svg';
+import { navItems } from '..';
+import { MenuToggle } from './MenuToggle';
 
-const sidebar = {
-  open: {
-    clipPath: `circle(100vh at 100% 50%)`,
-    transition: {
-      type: "spring",
-      stiffness: 20,
-      restDelta: 2,
-    },
-  },
-  closed: {
-    clipPath: "circle(0vh at 100% 0%)",
-    transition: {
-      delay: 0.2,
-      type: "spring",
-      stiffness: 400,
-      damping: 40,
-    },
-  },
-};
-const sidabarItem: Variants = {
-  open: {
-    opacity: 1,
-    transition: {
-      duration: 1,
-    },
-  },
-  closed: {
-    opacity: 0,
-  },
-};
-export default function MobileNavbar({ className = "" }) {
+type props = { className?: string };
+
+const MobileNavbar: React.FC<props> = function ({ className = '' }) {
   const [isOpen, toggleOpen] = useCycle(false, true);
   return (
     <Container
       className={cls(
         className,
-        " flex flex-row justify-between items-center py-5 "
+        ' flex flex-row justify-between items-center py-5 '
       )}
     >
       <div className="flex flex-row justify-between items-center w-full">
@@ -66,7 +38,7 @@ export default function MobileNavbar({ className = "" }) {
           <motion.div
             className="fixed right-0 top-0 h-screen bg-linear-1 bg-opacity-90   w-10/12 rounded-tl-xl rounded-bl-xl "
             variants={sidebar}
-            animate={isOpen ? "open" : "closed"}
+            animate={isOpen ? 'open' : 'closed'}
           >
             <div className="w-full h-full mt-10 flex flex-col justify-start items-center">
               {navItems.map((navItem, i) => (
@@ -78,7 +50,7 @@ export default function MobileNavbar({ className = "" }) {
                   inactiveClassName="text-gray-900"
                   activeClassName="text-white"
                 >
-                  <motion.span className="" variants={sidabarItem}>
+                  <motion.span className="" variants={sidebarItem}>
                     {navItem.text}
                   </motion.span>
                 </ActiveLink>
@@ -95,4 +67,37 @@ export default function MobileNavbar({ className = "" }) {
       </div>
     </Container>
   );
-}
+};
+
+export default MobileNavbar;
+
+const sidebar = {
+  open: {
+    clipPath: `circle(100vh at 100% 50%)`,
+    transition: {
+      type: 'spring',
+      stiffness: 20,
+      restDelta: 2,
+    },
+  },
+  closed: {
+    clipPath: 'circle(0vh at 100% 0%)',
+    transition: {
+      delay: 0.2,
+      type: 'spring',
+      stiffness: 400,
+      damping: 40,
+    },
+  },
+};
+const sidebarItem: Variants = {
+  open: {
+    opacity: 1,
+    transition: {
+      duration: 1,
+    },
+  },
+  closed: {
+    opacity: 0,
+  },
+};

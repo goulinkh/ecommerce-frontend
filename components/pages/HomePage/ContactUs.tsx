@@ -21,6 +21,7 @@ const ContactUs: React.FC = () => {
         <div className="md:w-1/2 h-64 md:h-full relative mt-12 md:mt-0">
           <Image
             src="/images/wood-hand-work.png"
+            alt="Travail artisanal"
             objectFit="contain"
             layout="fill"
           />

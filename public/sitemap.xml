@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://yoursitehere.com/cart</loc>
+  </url>
+
+  <url>
+    <loc>https://yoursitehere.com/contact</loc>
+  </url>
+
+  <url>
+    <loc>https://yoursitehere.com</loc>
+  </url>
+
+  <url>
+    <loc>https://yoursitehere.com/nouveaute</loc>
+  </url>
+
+  <url>
+    <loc>https://yoursitehere.com/auth/signin</loc>
+  </url>
+
+  <url>
+    <loc>https://yoursitehere.com/auth/signup</loc>
+  </url>
+
+  <url>
+    <loc>https://yoursitehere.com/catalogue/[id]</loc>
+  </url>
+
+  <url>
+    <loc>https://yoursitehere.com/products/[id]</loc>
+  </url>
+</urlset>

@@ -80,7 +80,12 @@ const ProductImage = ({
       role="button"
       aria-hidden
     >
-      <Image objectFit="contain" layout="fill" src={image.url} />
+      <Image
+        objectFit="contain"
+        layout="fill"
+        src={image.url}
+        alt={image.name}
+      />
       {children}
     </div>
   );

@@ -6,6 +6,7 @@ const CoverPhoto: React.FC = () => (
       objectFit="cover"
       layout="fill"
       src="/images/catalogue-cover.png "
+      alt="Bureau propre"
     ></Image>
   </div>
 );

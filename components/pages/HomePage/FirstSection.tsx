@@ -8,7 +8,7 @@ import HomeSphere from 'public/icons/home-sphere.svg';
 const Lamps: React.FC = () => (
   <div className="absolute top-0 right-44 xl:right-72 z-10">
     <div className="relative w-0 md:w-64 xl:w-80 h-auto">
-      <Image src="/images/lamps.png" width="362" height="296" />
+      <Image src="/images/lamps.png" alt="ampoules" width="362" height="296" />
     </div>
   </div>
 );

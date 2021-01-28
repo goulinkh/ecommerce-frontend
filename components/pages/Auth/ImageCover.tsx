@@ -13,6 +13,7 @@ const AuthImageCover: React.FC<props> = ({ invertX = false }) => (
       src="/images/signin-cover.png"
       objectFit="cover"
       layout="fill"
+      alt="Beau mobilier"
       className={cls({ 'transform -scale-x-1': invertX })}
     />
     <PagePatternSplitter2SVG

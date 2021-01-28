@@ -34,6 +34,7 @@ const ProductCard: React.FC<props> = function ({
             <div className="relative w-full h-52  overflow-h rounded">
               <Image
                 src={product.media[0]?.url}
+                alt={product.nom}
                 layout="fill"
                 objectFit="cover"
               />
@@ -43,7 +44,9 @@ const ProductCard: React.FC<props> = function ({
               <p className="pl-4 pb-6">{product.prix} €</p>
             ) : (
               <div className="pl-4 pb-6 flex flex-row items-center space-x-2">
-                <p className="text-blue-400">{getSalePrice(product)} €</p>
+                <p className="text-blue-400 font-bold">
+                  {getSalePrice(product)} €
+                </p>
                 <p className="text-sm text-gray-700 line-through">
                   {product.prix} €
                 </p>

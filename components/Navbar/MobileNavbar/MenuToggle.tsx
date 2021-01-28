@@ -22,7 +22,8 @@ export const MenuToggle: React.FC<props> = ({
     initial={isOpen}
     animate={isOpen ? 'open' : 'closed'}
     onClick={toggle}
-    className={cls(className, 'focus:outline-none ')}
+    aria-label="Center Align"
+    className={cls(className, ' ')}
   >
     <svg className="w-full h-full" viewBox="0 0 23 23">
       <Path

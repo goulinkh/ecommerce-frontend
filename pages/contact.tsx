@@ -7,7 +7,7 @@ import PagePatternSplitterSVG from 'public/icons/page-pattern-splitter.svg';
 
 const Catalogue: React.FC = function () {
   return (
-    <Layout footer={false} navbar={false}>
+    <Layout footer={false} navbar={false} title="Contacter nous">
       <ContactNavbar />
       <SocialLinks className="fixed top-16 right-6 z-20" />
       <div className="flex flex-col md:flex-row-reverse items-center md:justify-between h-screen w-screen pt-24 md:pt-0">

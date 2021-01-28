@@ -19,7 +19,7 @@ const Button: React.FC<props> = function ({
       disabled={disabled}
       className={cls(
         className,
-        'inline-flex flex-row items-center justify-center space-x-1 px-6 py-2 rounded-md fill-current focus:outline-none focus:ring-2 ring-blue-300 font-bold text-lg whitespace-nowrap',
+        'inline-flex flex-row items-center justify-center space-x-1 px-6 py-2 rounded-md fill-current font-bold text-lg whitespace-nowrap',
         {
           'bg-linear-1 text-white ring-blue-300 border-blue-400':
             fill === 'linear',
@@ -32,6 +32,7 @@ const Button: React.FC<props> = function ({
       style={{ filter: disabled && 'grayscale(0.8)' }}
       whileHover={{ scale: !disabled && 1.05 }}
       whileTap={{ scale: 1 }}
+      aria-label="Center Align"
     >
       {children}
     </motion.button>

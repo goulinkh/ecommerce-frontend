@@ -1,0 +1,26 @@
+stages:
+  - build
+  - stop-old-deploy
+  - deploy
+
+build:
+  stage: build
+  script:
+    - docker build -t ecommerce-frontend .
+
+stop-old-deploy:
+  stage: stop-old-deploy
+  dependencies:
+    - build
+  script:
+    - docker container stop ecommerce-frontend || true
+    - docker container rm ecommerce-frontend || true
+
+deploy:
+  stage: deploy
+  dependencies:
+    - build
+    - stop-old-deploy
+  script:
+    - docker run --name ecommerce-frontend -d -p 3000:3000 ecommerce-frontend
+    - wait-for-it -h localhost -p 3000

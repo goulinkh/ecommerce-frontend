@@ -29,6 +29,7 @@ const Layout: React.FC<props> = function ({
         <title>Beans.{title ? ` | ${title}` : ''}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="description" content={description}></meta>
+        <meta name="robots" content="notranslate"></meta>
       </Head>
       {navbar && <Navbar />}
       <div className={cls({ 'mt-24': navbar && !navbarOverlap })}>

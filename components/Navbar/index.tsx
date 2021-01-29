@@ -13,10 +13,15 @@ export const navItems = [
 const Navbar: React.FC = function () {
   const [sticky, setSticky] = useState(false);
   useEffect(() => {
-    window.addEventListener('scroll', () => {
+    const listener = () => {
       setSticky(window.scrollY > 100);
-    });
+    };
+    window.addEventListener('scroll', listener);
+    return () => {
+      window.removeEventListener('scroll', listener);
+    };
   }, []);
+
   return (
     <nav
       className={cls(

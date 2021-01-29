@@ -2,7 +2,7 @@ import MouseScroll from 'components/animated-icons/MouseScroll';
 import Button from 'components/Button';
 import Container from 'components/Container';
 import { motion } from 'framer-motion';
-import Image from 'next/image';
+import Image from 'components/Image';
 import HomeSphere from 'public/icons/home-sphere.svg';
 
 const Lamps: React.FC = () => (

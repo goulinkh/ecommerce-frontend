@@ -1,6 +1,6 @@
 import cls from 'classnames';
 import { motion } from 'framer-motion';
-import Image from 'next/image';
+import Image from 'components/Image';
 import PagePatternSplitter2SVG from 'public/icons/page-pattern-splitter-2.svg';
 
 type props = { invertX?: boolean };

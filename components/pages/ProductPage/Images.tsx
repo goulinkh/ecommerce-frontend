@@ -1,5 +1,5 @@
 import cls from 'classnames';
-import Image from 'next/image';
+import Image from 'components/Image';
 import MinusSVG from 'public/icons/minus.svg';
 import PlusSVG from 'public/icons/plus.svg';
 import { ReactNode, useState } from 'react';

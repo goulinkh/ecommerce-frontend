@@ -7,7 +7,7 @@ const NavTools: React.FC<props> = ({ allCatalogues }) => {
     `${name[0].toUpperCase()}${name.substr(1)}`;
 
   return (
-    <div className="w-44 flex flex-col space-y-10">
+    <div className="hidden md:flex flex-col w-44 space-y-10">
       {/* Catalogue section */}
       <SubSectionContainer>
         <SubSectionTitle text="Catalogues" />

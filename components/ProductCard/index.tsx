@@ -1,6 +1,6 @@
 import cls from 'classnames';
 import { motion } from 'framer-motion';
-import Image from 'next/image';
+import Image from 'components/Image';
 import Link from 'next/link';
 import CartEmptySVG from 'public/icons/cart-empty.svg';
 import { Product } from 'utils/types';

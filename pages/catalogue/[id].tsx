@@ -24,9 +24,9 @@ const Catalogue: React.FC<props> = function ({ products, allCatalogues }) {
     <Layout navbarOverlap>
       {/* cover */}
       <CoverPhoto />
-      <Container className="flex my-14">
+      <Container className="flex flex-row my-14">
         <NavTools allCatalogues={allCatalogues} />
-        <div className="w-full grid grid-cols-4 gap-10 p-4">
+        <div className="w-full grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-10 p-4">
           {products.map((p, i) => (
             <ProductCard
               key={i}
@@ -43,20 +43,34 @@ const Catalogue: React.FC<props> = function ({ products, allCatalogues }) {
 
 export default Catalogue;
 
+const customCatalogues = (allProducts) => [
+  {
+    id: 0,
+    name: 'Tout',
+    produits: allProducts,
+  },
+  {
+    id: -1,
+    name: 'promotion %',
+    produits: allProducts.filter((p) => !!p.promotion),
+  },
+];
+
 export const getStaticProps: GetStaticProps<props> = async function ({
   params,
 }) {
   let allProducts = await getAllProducts();
-  const catalogueTout = {
-    id: 0,
-    name: 'Tout',
-    produits: allProducts,
-  };
+  const newCatalogues = customCatalogues(allProducts);
+  const allCatalogues = [...newCatalogues, ...(await getAllCatalogues())];
   allProducts = allProducts.map((p) => ({
     ...p,
-    categories: [...p.categories, catalogueTout],
+    categories: [
+      ...p.categories,
+      ...allCatalogues.filter((c) =>
+        c.produits.find((catalogueProduct) => p.id === catalogueProduct.id)
+      ),
+    ],
   }));
-  const allCatalogues = [catalogueTout, ...(await getAllCatalogues())];
   const catalogue = allCatalogues.find((c) => String(c.id) == params.id);
   return {
     props: {

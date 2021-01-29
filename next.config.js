@@ -1,8 +1,9 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const appConfig = require('./config');
+
 module.exports = {
   images: {
-    domains: [new URL(appConfig.strapiURL).host],
+    domains: [new URL(appConfig.strapiURL).hostname],
   },
   webpack(config, { isServer }) {
     // Generate sitemap

@@ -1,11 +1,16 @@
-import Image from 'next/image';
+import Image from 'components/Image';
+type props = { special?: boolean };
 
-const CoverPhoto: React.FC = () => (
-  <div className="relative w-screen h-80">
+const CoverPhoto: React.FC<props> = ({ special = false }) => (
+  <div className="relative w-screen h-52">
     <Image
       objectFit="cover"
       layout="fill"
-      src="/images/catalogue-cover.png "
+      src={
+        special
+          ? '/images/summer-vipe-catalogue-cover.png'
+          : '/images/catalogue-cover.png'
+      }
       alt="Bureau propre"
     ></Image>
   </div>

@@ -1,7 +1,7 @@
 import Button from 'components/Button';
 import Container from 'components/Container';
 import InViewAnimation from 'components/InViewAnimation';
-import Image from 'next/image';
+import Image from 'components/Image';
 import Link from 'next/link';
 
 const ContactUs: React.FC = () => {

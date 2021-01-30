@@ -12,8 +12,8 @@ const Cart: React.FC = function () {
   const { cart, dispatch } = useContext(CartContext);
   return (
     <Layout className="h-screen flex flex-col justify-between ">
-      <Container className="grid grid-cols-2 gap-12 h-3/5 py-6">
-        <div className="rounded-lg shadow-md bg-white p-5 flex flex-col h-3/5">
+      <Container className="grid grid-rows-2 md:grid-rows-none md:grid-cols-2 gap-12 w-full md:h-3/5 py-6">
+        <div className="rounded-lg shadow-md bg-white p-5 flex flex-col w-full md:h-3/5">
           <div className="font-bold flex flex-row items-center justify-between mb-5">
             <h2 className="text-2xl">Votre panier</h2>
             <span>Prix total: 650 €</span>

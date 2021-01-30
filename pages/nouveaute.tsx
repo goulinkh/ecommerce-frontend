@@ -23,7 +23,7 @@ const Nouveaute: React.FC<props> = function ({ products, catalogue }) {
       {/* cover */}
       <CoverPhoto special />
       <Container className="flex flex-row my-14">
-        <div className="w-full grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-10 p-4">
+        <div className="w-full grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-10 md:p-4">
           {products.map((p, i) => (
             <ProductCard
               key={i}

@@ -5,7 +5,7 @@ import LargeScreenNavbar from './LargeScreenNavbar';
 import MobileNavbar from './MobileNavbar';
 
 export const navItems = [
-  { text: 'Accueil', href: '/' },
+  // { text: 'Accueil', href: '/' },
   { text: 'Catalogue', href: '/catalogue/0', regex: /^\/catalogue\/.*/ },
   { text: 'Nouveautés', href: '/nouveaute' },
   { text: 'Contact', href: '/contact' },

@@ -14,9 +14,9 @@ type props = {
 
 const ActiveLink: React.FC<props> = ({
   children,
-  activeClassName = '',
-  inactiveClassName = '',
-  className = '',
+  activeClassName,
+  inactiveClassName,
+  className,
   href,
   regex = null,
   ...props
@@ -27,14 +27,10 @@ const ActiveLink: React.FC<props> = ({
   return (
     <Link href={href} {...props}>
       <span
-        className={cls(
-          'cursor-pointer',
-          {
-            [`${activeClassName}`]: isActive,
-            [`${inactiveClassName}`]: !isActive,
-          },
-          className
-        )}
+        className={cls('cursor-pointer', className, {
+          [`${activeClassName}`]: isActive,
+          [`${inactiveClassName}`]: !isActive,
+        })}
       >
         {children}
       </span>

@@ -19,13 +19,14 @@ const LargeScreenNavbar: React.FC<props> = function ({ className = '', cart }) {
     >
       <div className="flex flex-row justify-between items-center">
         <Logo className="mr-20" />
-        <div className="flex flex-row space-x-6 items-center">
+        <div className="flex flex-row items-center">
           {navItems.map((navItem, i) => (
             <ActiveLink
               key={i}
               href={navItem.href}
               regex={navItem.regex}
-              activeClassName="text-blue-400"
+              className="px-4 py-1 rounded-lg transition-all transform hover:scale-110 focus:scale-110"
+              activeClassName="bg-blue-400 text-white "
             >
               <span>{navItem.text}</span>
             </ActiveLink>

@@ -19,7 +19,7 @@ const Button: React.FC<props> = function ({
       disabled={disabled}
       className={cls(
         className,
-        'inline-flex flex-row items-center justify-center space-x-1 px-6 py-2 rounded-md fill-current font-bold text-lg whitespace-nowrap',
+        'select-none inline-flex flex-row items-center justify-center space-x-1 px-6 py-2 rounded-md fill-current font-bold text-lg whitespace-nowrap',
         {
           'bg-linear-1 text-white ring-blue-300 border-blue-400':
             fill === 'linear',

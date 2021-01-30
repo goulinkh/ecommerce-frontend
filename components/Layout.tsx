@@ -1,4 +1,5 @@
 import cls from 'classnames';
+import { CartProvider } from 'context/cart';
 import Head from 'next/head';
 import Footer from './Footer';
 import Navbar from './Navbar';
@@ -31,7 +32,11 @@ const Layout: React.FC<props> = function ({
         <meta name="description" content={description}></meta>
         <meta name="robots" content="notranslate"></meta>
       </Head>
-      {navbar && <Navbar />}
+      {navbar && (
+        <CartProvider>
+          <Navbar />
+        </CartProvider>
+      )}
       <div className={cls({ 'mt-24': navbar && !navbarOverlap })}>
         {children}
       </div>

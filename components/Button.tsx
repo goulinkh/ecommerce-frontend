@@ -6,6 +6,7 @@ type props = {
   className?: string;
   children: React.ReactNode;
   disabled?: boolean;
+  onClick?: any;
 };
 
 const Button: React.FC<props> = function ({
@@ -13,10 +14,12 @@ const Button: React.FC<props> = function ({
   className,
   disabled = false,
   children,
+  onClick,
 }) {
   return (
     <motion.button
       disabled={disabled}
+      onClick={onClick}
       className={cls(
         className,
         'select-none inline-flex flex-row items-center justify-center space-x-1 px-6 py-2 rounded-md fill-current font-bold text-lg whitespace-nowrap',
@@ -29,8 +32,8 @@ const Button: React.FC<props> = function ({
           'cursor-default': disabled,
         }
       )}
-      style={{ filter: disabled && 'grayscale(0.8)' }}
-      whileHover={{ scale: !disabled && 1.05 }}
+      style={{ filter: disabled ? 'grayscale(0.8)' : '' }}
+      whileHover={{ scale: !disabled ? 1.05 : 1 }}
       whileTap={{ scale: 1 }}
       aria-label="Center Align"
     >

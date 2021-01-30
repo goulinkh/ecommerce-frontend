@@ -2,13 +2,14 @@ import cls from 'classnames';
 import ActiveLink from 'components/ActiveLink';
 import Container from 'components/Container';
 import Logo from 'components/Logo';
+import { Cart } from 'context/cart';
 import Link from 'next/link';
 import CartLogo from 'public/icons/cart.svg';
 import UserLogo from 'public/icons/user.svg';
 import { navItems } from '.';
 
-type props = { className?: string };
-const LargeScreenNavbar: React.FC<props> = function ({ className = '' }) {
+type props = { className?: string; cart: Cart };
+const LargeScreenNavbar: React.FC<props> = function ({ className = '', cart }) {
   return (
     <Container
       className={cls(
@@ -41,7 +42,7 @@ const LargeScreenNavbar: React.FC<props> = function ({ className = '' }) {
         <Link href="/cart">
           <div className="flex flex-row items-center justify-center cursor-pointer">
             <CartLogo className="text-black fill-current mr-4 h-6 w-6" />
-            <span>0</span>
+            <span>{cart.items.length}</span>
           </div>
         </Link>
       </div>

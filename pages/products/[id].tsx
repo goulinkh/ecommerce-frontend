@@ -15,8 +15,9 @@ import { getAllProducts } from 'utils/products';
 import { Product as P } from 'utils/types';
 import PlusSVG from 'public/icons/plus.svg';
 import MinusSVG from 'public/icons/minus.svg';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import cls from 'classnames';
+import { CartContext, CartProvider, CartActionKind } from 'context/cart';
 type props = { product: P };
 
 const Product: React.FC<props> = function ({ product }) {
@@ -45,7 +46,9 @@ const Product: React.FC<props> = function ({ product }) {
               </div>
             </div>
             {enStock ? (
-              <AddToCartSection availableQuantity={product.quantite} />
+              <CartProvider>
+                <AddToCartSection product={product} />
+              </CartProvider>
             ) : (
               <NoStockSection />
             )}
@@ -82,17 +85,27 @@ const Product: React.FC<props> = function ({ product }) {
   );
 };
 
-const AddToCartSection = ({ availableQuantity }) => {
+const AddToCartSection = ({ product }) => {
+  const { cart, dispatch } = useContext(CartContext);
+  console.log('cart', cart);
   const [quantity, setQuantity] = useState(1);
   const canSubtract = quantity > 1;
-  const canAdd = availableQuantity == -1 || quantity < availableQuantity;
+  const productInCartQuantity =
+    cart.items.find((i) => i.product.id === product.id)?.quantity || 0;
+  const canAddQuantity =
+    product.quantite == -1 ||
+    quantity + productInCartQuantity < product.quantite;
+  const canAddToCart =
+    product.quantite == -1 ||
+    quantity + productInCartQuantity <= product.quantite;
+
   return (
     <div className="w-full flex flex-col md:flex-row items-center space-y-3 md:space-y-0 md:space-x-3 pb-6">
       <div className="flex flex-row items-center justify-between bg-white rounded shadow h-11 transition-all ">
         <div
           className={cls('p-2 ', {
             'opacity-50': !canSubtract,
-            ' hover:bg-gray-100 rounded': canSubtract,
+            'hover:bg-gray-100 rounded': canSubtract,
           })}
           onClick={() => canSubtract && setQuantity(quantity - 1)}
           role="button"
@@ -102,11 +115,11 @@ const AddToCartSection = ({ availableQuantity }) => {
         </div>
         <span className="text-lg w-6 text-center select-none">{quantity}</span>
         <div
-          className={cls('p-2 ', {
-            'opacity-50': !canAdd,
-            'transition-all hover:bg-gray-100 rounded': canAdd,
+          className={cls('p-2', {
+            'opacity-50': !canAddQuantity,
+            'transition-all hover:bg-gray-100 rounded': canAddQuantity,
           })}
-          onClick={() => canAdd && setQuantity(quantity + 1)}
+          onClick={() => canAddQuantity && setQuantity(quantity + 1)}
           role="button"
           aria-hidden
         >
@@ -114,7 +127,16 @@ const AddToCartSection = ({ availableQuantity }) => {
         </div>
       </div>
 
-      <Button className="flex-1">
+      <Button
+        className="flex-1"
+        onClick={() =>
+          dispatch({
+            type: CartActionKind.Add,
+            payload: { product, quantity },
+          })
+        }
+        disabled={!canAddToCart}
+      >
         <span>Ajouter au panier</span>
         <CartAddSVG className="w-6" />
       </Button>

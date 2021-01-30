@@ -35,13 +35,13 @@ const LargeScreenNavbar: React.FC<props> = function ({ className = '', cart }) {
       <div className="flex flex-row space-x-6 items-center">
         <Link href="/auth/signin">
           <div className="flex flex-row items-center justify-center cursor-pointer">
-            <UserLogo className="text-black fill-current mr-4 h-6 w-6" />
+            <UserLogo className="text-black fill-current mr-4 h-6" />
             <span className="">Se connecter</span>
           </div>
         </Link>
         <Link href="/cart">
           <div className="flex flex-row items-center justify-center cursor-pointer">
-            <CartLogo className="text-black fill-current mr-4 h-6 w-6" />
+            <CartLogo className="text-black fill-current mr-4 h-6" />
             <span>{cart.items.length}</span>
           </div>
         </Link>

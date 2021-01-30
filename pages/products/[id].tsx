@@ -1,8 +1,9 @@
+import cls from 'classnames';
 import Button from 'components/Button';
 import Container from 'components/Container';
 import Layout from 'components/Layout';
 import ProductImages from 'components/pages/ProductPage/Images';
-import Select from 'components/Select';
+import { CartActionKind, CartContext } from 'context/cart';
 import { GetStaticPaths, GetStaticProps, GetStaticPropsResult } from 'next';
 import { useRouter } from 'next/router';
 import BellSVG from 'public/icons/bell.svg';
@@ -11,13 +12,11 @@ import CartEmptySVG from 'public/icons/cart-empty.svg';
 import EmailSVG from 'public/icons/email.svg';
 import FullStarSVG from 'public/icons/full-star.svg';
 import HalfStarSVG from 'public/icons/half-star.svg';
+import MinusSVG from 'public/icons/minus.svg';
+import PlusSVG from 'public/icons/plus.svg';
+import { useContext, useState } from 'react';
 import { getAllProducts } from 'utils/products';
 import { Product as P } from 'utils/types';
-import PlusSVG from 'public/icons/plus.svg';
-import MinusSVG from 'public/icons/minus.svg';
-import { useContext, useState } from 'react';
-import cls from 'classnames';
-import { CartContext, CartProvider, CartActionKind } from 'context/cart';
 type props = { product: P };
 
 const Product: React.FC<props> = function ({ product }) {
@@ -46,9 +45,7 @@ const Product: React.FC<props> = function ({ product }) {
               </div>
             </div>
             {enStock ? (
-              <CartProvider>
-                <AddToCartSection product={product} />
-              </CartProvider>
+              <AddToCartSection product={product} />
             ) : (
               <NoStockSection />
             )}
@@ -87,7 +84,6 @@ const Product: React.FC<props> = function ({ product }) {
 
 const AddToCartSection = ({ product }) => {
   const { cart, dispatch } = useContext(CartContext);
-  console.log('cart', cart);
   const [quantity, setQuantity] = useState(1);
   const canSubtract = quantity > 1;
   const productInCartQuantity =

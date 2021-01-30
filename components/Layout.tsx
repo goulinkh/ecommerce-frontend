@@ -1,5 +1,4 @@
 import cls from 'classnames';
-import { CartProvider } from 'context/cart';
 import Head from 'next/head';
 import Footer from './Footer';
 import Navbar from './Navbar';
@@ -13,6 +12,7 @@ type props = {
   footer?: boolean;
   navbarOverlap?: boolean;
   title?: string;
+  className?: string;
   description?: string;
 };
 
@@ -22,6 +22,7 @@ const Layout: React.FC<props> = function ({
   footer = true,
   navbarOverlap = false,
   title,
+  className,
   description = defaultDescription,
 }) {
   return (
@@ -32,15 +33,13 @@ const Layout: React.FC<props> = function ({
         <meta name="description" content={description}></meta>
         <meta name="robots" content="notranslate"></meta>
       </Head>
-      {navbar && (
-        <CartProvider>
-          <Navbar />
-        </CartProvider>
-      )}
-      <div className={cls({ 'mt-24': navbar && !navbarOverlap })}>
+      <div className={className}>
+        {navbar && <Navbar />}
+        <div className={cls({ 'mt-24': navbar && !navbarOverlap })}></div>
+
         {children}
+        {footer && <Footer />}
       </div>
-      {footer && <Footer />}
     </>
   );
 };

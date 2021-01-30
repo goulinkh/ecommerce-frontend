@@ -1,9 +1,131 @@
+import cls from 'classnames';
+import Button from 'components/Button';
+import Container from 'components/Container';
+import Image from 'components/Image';
 import Layout from 'components/Layout';
-
+import { CartActionKind, CartContext } from 'context/cart';
+import MinusSVG from 'public/icons/minus.svg';
+import PlusSVG from 'public/icons/plus.svg';
+import TrashSVG from 'public/icons/trash.svg';
+import { useContext } from 'react';
 const Cart: React.FC = function () {
+  const { cart, dispatch } = useContext(CartContext);
   return (
-    <Layout>
-      <h1>Cart</h1>
+    <Layout className="h-screen flex flex-col justify-between ">
+      <Container className="grid grid-cols-2 gap-12 h-3/5 py-6">
+        <div className="rounded-lg shadow-md bg-white p-5 flex flex-col h-3/5">
+          <div className="font-bold flex flex-row items-center justify-between mb-5">
+            <h2 className="text-2xl">Votre panier</h2>
+            <span>Prix total: 650 €</span>
+          </div>
+          <div className="overflow-y-auto">
+            {cart.items.map((item, i) => {
+              const canSubtract = item.quantity > 1;
+
+              const canAddQuantity =
+                item.product.quantite == -1 ||
+                item.quantity < item.product.quantite;
+
+              return (
+                <div
+                  key={i}
+                  className="flex flex-row items-center justify-between w-full space-x-5 h-40 border-b py-8 pr-4 border-gray-400 last:border-0"
+                >
+                  <div className="relative w-32 h-32 rounded">
+                    <Image
+                      src={item.product.media[0].url}
+                      alt={item.product.nom}
+                      layout="fill"
+                      objectFit="cover"
+                    />
+                  </div>
+                  <div className="h-full grid grid-rows-2 items-center flex-1">
+                    <p>{item.product.nom}</p>
+                    <p className="text-sm text-gray-600">
+                      Prix unité: <span>{item.product.prix} €</span>
+                    </p>
+                  </div>
+                  <div className="h-full grid grid-rows-2  items-center">
+                    <div className="flex flex-row items-center justify-between bg-white rounded shadow h-11 transition-all ">
+                      <div
+                        className={cls('p-2 hover:bg-gray-100 rounded', {
+                          'hover:text-red-500': !canSubtract,
+                        })}
+                        onClick={() => {
+                          if (canSubtract)
+                            dispatch({
+                              type: CartActionKind.Remove,
+                              payload: { ...item, quantity: 1 },
+                            });
+                          else
+                            dispatch({
+                              type: CartActionKind.Remove,
+                              payload: { ...item, quantity: 1 },
+                            });
+                        }}
+                        role="button"
+                        aria-hidden
+                      >
+                        {canSubtract ? (
+                          <MinusSVG className="w-5 h-5" />
+                        ) : (
+                          <TrashSVG className="w-5 h-5" />
+                        )}
+                      </div>
+                      <span className="text-lg w-6 text-center select-none">
+                        {item.quantity}
+                      </span>
+                      <div
+                        className={cls('p-2', {
+                          'opacity-50': !canAddQuantity,
+                          'transition-all hover:bg-gray-100 rounded': canAddQuantity,
+                        })}
+                        onClick={() =>
+                          canAddQuantity &&
+                          dispatch({
+                            type: CartActionKind.Add,
+                            payload: { ...item, quantity: 1 },
+                          })
+                        }
+                        role="button"
+                        aria-hidden
+                      >
+                        <PlusSVG className="w-5 h-5" />
+                      </div>
+                    </div>
+                    <p className="text-sm">
+                      Sous-total:
+                      <span>{item.product.prix * item.quantity} €</span>
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+        <div className="rounded-lg shadow-md bg-white py-5 px-8 flex flex-col justify-evenly h-3/5">
+          <p className="text-xl font-bold">Détails</p>
+          <div className="space-y-2">
+            <p>
+              Prix total des articles: <span>520 €</span>
+            </p>
+            <p>
+              VAT(20%): <span>130 €</span>
+            </p>
+            <p>
+              Prix total: <span className="font-bold">650 €</span>
+            </p>
+          </div>
+          <div>
+            <h3 className="text-xl font-bold">Méthode de livraison</h3>
+            <p>TODO: faire le sélection de mode de livraison</p>
+          </div>
+          <p className="text-xl font-bold">
+            Total à payer <span className="ml-5 text-blue-400">650 €</span>
+          </p>
+          <Button className="w-full">Passer ma commande</Button>
+        </div>
+      </Container>
     </Layout>
   );
 };

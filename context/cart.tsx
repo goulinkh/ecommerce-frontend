@@ -46,9 +46,14 @@ function cartReducer(state: Cart, action: Action): Cart {
         return persisteCart({ items: [...state.items, action.payload] });
       }
     case CartActionKind.Remove:
-      return persisteCart({
-        items: [...state.items.filter((i) => i !== itemToUpdate)],
-      });
+      itemToUpdate.quantity -= action.payload.quantity;
+      if (itemToUpdate.quantity <= 0)
+        return persisteCart({
+          items: [...state.items.filter((i) => i !== itemToUpdate)],
+        });
+      else {
+        return persisteCart({ items: [...state.items] });
+      }
     default:
       throw new Error('Unknown Cart Action');
   }

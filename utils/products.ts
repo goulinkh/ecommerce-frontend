@@ -1,6 +1,7 @@
+import config from 'config';
 import marked from 'marked';
 import { parse } from 'node-html-parser';
-import config from 'config';
+import { cachedFetch } from './common';
 import { Media, Product } from './types';
 
 export function getProductsByCatalogue(
@@ -12,20 +13,15 @@ export function getProductsByCatalogue(
   );
 }
 
-let cache: Promise<Product[]> = null;
-
 export async function getAllProducts(): Promise<Product[]> {
-  if (cache) return cache;
-  const response = await fetch(new URL('/produits', config.strapiURL).href);
-  if (response.status >= 400) {
-    throw new Error(`Strapi Server returned status code ${response.status}`);
-  }
-  cache = (await response.json())?.map((p: Product) => ({
+  const produits = await cachedFetch<Product[]>(
+    new URL('/produits', config.strapiURL).href
+  );
+  return produits.map((p: Product) => ({
     ...p,
     ...parseDescription(p.description),
     media: (p.media || []).map(parseMedia),
   }));
-  return cache;
 }
 
 export function parseProduit(p: Product): Product {

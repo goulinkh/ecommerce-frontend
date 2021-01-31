@@ -4,7 +4,9 @@ import Image from 'components/Image';
 import Link from 'next/link';
 import CartEmptySVG from 'public/icons/cart-empty.svg';
 import { Product } from 'utils/types';
-
+import { useContext, useState } from 'react';
+import AddSVG from 'public/icons/plus.svg';
+import { CartActionKind, CartContext } from 'context/cart';
 type props = {
   product: Product;
   variant?: 'card' | 'transparent';
@@ -16,9 +18,22 @@ const ProductCard: React.FC<props> = function ({
   variant = 'card',
   className,
 }) {
+  const { dispatch } = useContext(CartContext);
   const enStock = !!product.quantite;
+  const [hover, setHover] = useState(false);
+  const onAddToCart = (e) => {
+    e.stopPropagation();
+    dispatch({
+      type: CartActionKind.Add,
+      payload: { product, quantity: 1 },
+    });
+  };
+
   return (
-    <motion.div>
+    <motion.div
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+    >
       <Link href={`/products/${product.id}`}>
         <div
           className={cls(
@@ -39,19 +54,32 @@ const ProductCard: React.FC<props> = function ({
                 objectFit="cover"
               />
             </div>
-            <p className="pl-4 pt-3 pb-1 font-bold">{product.nom}</p>
-            {!onSale(product) ? (
-              <p className="pl-4 pb-6">{product.prix} €</p>
-            ) : (
-              <div className="pl-4 pb-6 flex flex-row items-center space-x-2">
-                <p className="text-blue-400 font-bold">
-                  {getSalePrice(product)} €
-                </p>
-                <p className="text-sm text-gray-700 line-through">
-                  {product.prix} €
-                </p>
+            <div className="w-full flex flex-row items-center justify-between">
+              <div>
+                <p className="pl-4 pt-3 pb-1 font-bold">{product.nom}</p>
+                {!onSale(product) ? (
+                  <p className="pl-4 pb-6">{product.prix} €</p>
+                ) : (
+                  <div className="pl-4 pb-6 flex flex-row items-center space-x-2">
+                    <p className="text-blue-400 font-bold">
+                      {getSalePrice(product)} €
+                    </p>
+                    <p className="text-sm text-gray-700 line-through">
+                      {product.prix} €
+                    </p>
+                  </div>
+                )}
               </div>
-            )}
+              <motion.div
+                animate={hover && enStock ? 'show' : 'hidden'}
+                variants={{ hidden: { opacity: 0 }, show: { opacity: 1 } }}
+                onClick={onAddToCart}
+                role="button"
+                aria-hidden
+              >
+                <AddSVG className="w-8 h-8 rounded-full border border-gray-400 text-gray-400 p-1 m-3 hover:border-gray-700 hover:text-gray-600 transition-all" />
+              </motion.div>
+            </div>
           </div>
           {!enStock && (
             <div className="absolute h-full w-full rounded-lg top-0 left-0 flex justify-center items-center opacity-25 bg-black">

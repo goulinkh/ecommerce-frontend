@@ -50,13 +50,13 @@ const ProductsSlider: React.FC<props> = function ({
       </motion.div>
       <div className="flex flex-col items-start justify-between space-y-4">
         <ProgressBar progressWidth={xRange} width={44} className="w-40" />
-        <div className="flex flex-row items-center justify-start space-x-6 text-gray-500">
+        <div className="flex flex-row items-center justify-start space-x-4 text-gray-500">
           <AnchorLeftSVG
-            className="h-6 w-auto hover:text-gray-900 cursor-pointer"
+            className="h-10 p-2 w-auto hover:text-gray-900 cursor-pointer"
             onClick={() => scrollProductsList(-1)}
           />
           <AnchorRightSVG
-            className="h-6 w-auto hover:text-gray-900 cursor-pointer"
+            className="h-10 p-2 w-auto hover:text-gray-900 cursor-pointer"
             onClick={() => scrollProductsList(1)}
           />
         </div>

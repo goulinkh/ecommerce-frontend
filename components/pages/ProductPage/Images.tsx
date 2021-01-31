@@ -71,7 +71,7 @@ const ProductImage = ({
         {
           'h-full w-20 cursor-pointer': size === 'small',
         },
-        { 'w-full h-full': size === 'big' },
+        { 'w-full h-full cursor-zoom-in': size === 'big' },
         { 'border border-gray-600': active }
       )}
       onClick={() => onClick && onClick()}

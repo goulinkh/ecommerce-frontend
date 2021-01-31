@@ -26,7 +26,7 @@ const LargeScreenNavbar: React.FC<props> = function ({ className = '', cart }) {
               href={navItem.href}
               regex={navItem.regex}
               className="px-4 py-1 rounded-lg transition-all transform hover:scale-110 focus:scale-110"
-              activeClassName="bg-blue-400 text-white "
+              activeClassName="bg-blue-400 text-white bg-opacity-75"
             >
               <span>{navItem.text}</span>
             </ActiveLink>

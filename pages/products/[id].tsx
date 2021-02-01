@@ -2,12 +2,13 @@ import cls from 'classnames';
 import Button from 'components/Button';
 import Container from 'components/Container';
 import Layout from 'components/Layout';
+import AddToCartButton from 'components/pages/ProductPage/AddToCartButton';
 import ProductImages from 'components/pages/ProductPage/Images';
+import Tooltip from 'components/Tooltip';
 import { CartActionKind, CartContext } from 'context/cart';
 import { GetStaticPaths, GetStaticProps, GetStaticPropsResult } from 'next';
 import { useRouter } from 'next/router';
 import BellSVG from 'public/icons/bell.svg';
-import CartAddSVG from 'public/icons/cart-add.svg';
 import CartEmptySVG from 'public/icons/cart-empty.svg';
 import EmailSVG from 'public/icons/email.svg';
 import FullStarSVG from 'public/icons/full-star.svg';
@@ -122,31 +123,32 @@ const AddToCartSection = ({ product }) => {
           <PlusSVG className="w-5 h-5" />
         </div>
       </div>
-
-      <Button
-        className="flex-1"
+      <AddToCartButton
+        className="flex-1 w-full"
+        disabled={!canAddToCart}
         onClick={() =>
           dispatch({
             type: CartActionKind.Add,
             payload: { product, quantity },
           })
         }
-        disabled={!canAddToCart}
-      >
-        <span>Ajouter au panier</span>
-        <CartAddSVG className="w-6" />
-      </Button>
+      />
     </div>
   );
 };
+
 const NoStockSection = () => (
   <div className="w-full flex flex-row items-center space-x-3 pb-6">
-    <Button fill="primary" className="flex-shrink-0">
-      <BellSVG className="w-6 text-white" />
-    </Button>
-    <Button fill="primary" className="flex-shrink-0">
-      <EmailSVG className="w-6 text-white" />
-    </Button>
+    <Tooltip tooltipContent="Recevoir une notification">
+      <Button fill="primary" className="flex-shrink-0">
+        <BellSVG className="w-6 text-white" />
+      </Button>
+    </Tooltip>
+    <Tooltip tooltipContent="Recevoir un mail, quand il sera en stock">
+      <Button fill="primary" className="flex-shrink-0">
+        <EmailSVG className="w-6 text-white" />
+      </Button>
+    </Tooltip>
     <Button fill="outline" disabled className="flex-1">
       <span>Produit indisponible</span>
       <CartEmptySVG className="w-6" />

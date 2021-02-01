@@ -1,9 +1,10 @@
+import Container from 'components/Container';
+import Logo from 'components/Logo';
+import Tooltip from 'components/Tooltip';
 import Link from 'next/link';
 import Facebook from 'public/icons/facebook.svg';
 import Instagram from 'public/icons/instagram.svg';
 import Twitter from 'public/icons/twitter.svg';
-import Container from 'components/Container';
-import Logo from 'components/Logo';
 
 const Footer: React.FC = function () {
   return (
@@ -37,21 +38,29 @@ const Footer: React.FC = function () {
           <div className="flex flex-col justify-start space-y-2 md:space-y-5">
             <div className="font-bold">Suivez-nous sur les réseaux socieux</div>
             <div className="flex flex-row justify-start space-x-5">
-              <Link href="/#">
-                <span>
-                  <Facebook className="w-6 h-w-6 cursor-pointer" />
-                </span>
-              </Link>
-              <Link href="/#">
-                <span>
-                  <Instagram className="w-6 h-w-6 cursor-pointer" />
-                </span>
-              </Link>
-              <Link href="/#">
-                <span>
-                  <Twitter className="w-6 h-w-6 cursor-pointer" />
-                </span>
-              </Link>
+              <Tooltip tooltipContent="Facebook">
+                <Link href="/#">
+                  <span>
+                    <Facebook className="w-6 h-w-6 cursor-pointer" />
+                  </span>
+                </Link>
+              </Tooltip>
+
+              <Tooltip tooltipContent="Instagram">
+                <Link href="/#">
+                  <span>
+                    <Instagram className="w-6 h-w-6 cursor-pointer" />
+                  </span>
+                </Link>
+              </Tooltip>
+
+              <Tooltip tooltipContent="Twitter">
+                <Link href="/#">
+                  <span>
+                    <Twitter className="w-6 h-w-6 cursor-pointer" />
+                  </span>
+                </Link>
+              </Tooltip>
             </div>
           </div>
         </div>

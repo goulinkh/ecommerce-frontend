@@ -10,7 +10,7 @@ type props = {
 const InViewAnimation: React.FC<props> = function ({ children, className }) {
   // https://stackoverflow.com/questions/58958972/framer-motion-animate-when-element-is-in-view-when-you-scroll-to-element
   const controls = useAnimation();
-  const [ref, inView] = useInView({ threshold: 0.2 });
+  const [ref, inView] = useInView({ threshold: 0.3 });
   useEffect(() => {
     if (inView) {
       controls.start('visible');
@@ -23,8 +23,8 @@ const InViewAnimation: React.FC<props> = function ({ children, className }) {
       animate={controls}
       initial="hidden"
       variants={{
-        visible: { opacity: 1 },
-        hidden: { opacity: 0, transition: { delay: 0.5 } },
+        hidden: { opacity: 0 },
+        visible: { opacity: 1, transition: { duration: 0.8 } },
       }}
       className={className}
     >

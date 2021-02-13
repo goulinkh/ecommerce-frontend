@@ -13,7 +13,7 @@ type props = {
   catalogue: Catalogue;
 };
 
-const Nouveaute: React.FC<props> = function ({ products, catalogue }) {
+const Nouveaute: React.FC<props> = function ({ products }) {
   const router = useRouter();
   if (router.isFallback) {
     return <></>;
@@ -39,9 +39,7 @@ const Nouveaute: React.FC<props> = function ({ products, catalogue }) {
 };
 export default Nouveaute;
 
-export const getStaticProps: GetStaticProps<props> = async function ({
-  params,
-}) {
+export const getStaticProps: GetStaticProps<props> = async function () {
   const nouveauteCatalogue = await getCatalogueByName('nouveauté');
   return {
     props: {

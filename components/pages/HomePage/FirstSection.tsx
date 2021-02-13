@@ -4,6 +4,7 @@ import Container from 'components/Container';
 import { motion } from 'framer-motion';
 import Image from 'components/Image';
 import HomeSphere from 'public/icons/home-sphere.svg';
+import Link from 'next/link';
 
 const Lamps: React.FC = () => (
   <div className="absolute top-0 right-44 xl:right-72 z-10">
@@ -46,7 +47,11 @@ const FirstSection: React.FC = function () {
             nouvelle collection apporte du confort à votre maison.
           </p>
           <div className="flex justify-center items-center w-full">
-            <Button fill="primary">Découvrir</Button>
+            <Link href="/nouveaute">
+              <span>
+                <Button fill="primary">Découvrir</Button>
+              </span>
+            </Link>
           </div>
         </motion.div>
         <motion.div

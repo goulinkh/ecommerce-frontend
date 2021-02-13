@@ -11,7 +11,6 @@ type props = {
 const ProductSliderHeader: React.FC<props> = function ({ title, href }) {
   const [hover, setHover] = useState(false);
 
-
   return (
     <div className="w-full pr-12 md:pr-36 lg:pr-48 flex flex-row justify-between items-center">
       <h2 className="text-xl font-bold">{title}</h2>

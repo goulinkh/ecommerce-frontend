@@ -16,7 +16,8 @@
     "google-map-react": "^2.1.9",
     "next": "^10.0.0",
     "react": "16.13.1",
-    "react-dom": "16.13.1"
+    "react-dom": "16.13.1",
+    "react-toastify": "^7.0.3"
   },
   "devDependencies": {
     "@tailwindcss/custom-forms": "^0.2.1",

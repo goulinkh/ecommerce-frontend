@@ -1,9 +1,4 @@
-import {
-  createContext,
-  ReducerWithoutAction,
-  useReducer,
-  useState,
-} from 'react';
+import { createContext, useReducer } from 'react';
 import { Product } from 'utils/types';
 
 // TODO: make enum for actions
@@ -24,7 +19,9 @@ export type Cart = {
 };
 
 export enum CartActionKind {
+  // eslint-disable-next-line no-unused-vars
   Add = 'ADD_PRODUCT',
+  // eslint-disable-next-line no-unused-vars
   Remove = 'REMOVE_PRODUCT',
 }
 

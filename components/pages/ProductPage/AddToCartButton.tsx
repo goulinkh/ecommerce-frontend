@@ -1,9 +1,9 @@
+import cls from 'classnames';
 import Button from 'components/Button';
 import { motion, useAnimation } from 'framer-motion';
 import CartAddSVG from 'public/icons/cart-add.svg';
 import { useEffect, useState } from 'react';
-import cls from 'classnames';
-import content from 'public/icons/cart-add.svg';
+
 type props = {
   onClick: any;
   disabled?: boolean;
@@ -62,10 +62,13 @@ const AddToCartButton: React.FC<props> = ({ onClick, className, disabled }) => {
       className={cls(className, 'overflow-hidden')}
       disabled={disabled}
     >
-      <motion.div animate={contentControls} className="flex flex-row items-center space-x-2">
+      <motion.div
+        animate={contentControls}
+        className="flex flex-row items-center space-x-2"
+      >
         <CartAddSVG className="w-6" />
         <span>Ajouter au panier</span>
-      </motion.div> 
+      </motion.div>
       <motion.svg
         className="w-8"
         viewBox="0 0 30 27"

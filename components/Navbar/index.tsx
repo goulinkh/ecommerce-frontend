@@ -1,6 +1,7 @@
 import cls from 'classnames';
 import { CartContext } from 'context/cart';
-import { useContext, useEffect, useState } from 'react';
+import { NavbarIsStickyContext } from 'context/NavbarIsSticky';
+import { useContext, useEffect } from 'react';
 import LargeScreenNavbar from './LargeScreenNavbar';
 import MobileNavbar from './MobileNavbar';
 
@@ -12,9 +13,8 @@ export const navItems = [
 ];
 
 const Navbar: React.FC = function () {
-  const [sticky, setSticky] = useState(false);
+  const { sticky, setSticky } = useContext(NavbarIsStickyContext);
   const { cart } = useContext(CartContext);
-
   useEffect(() => {
     const listener = () => {
       setSticky(window.scrollY > 100);
@@ -23,14 +23,14 @@ const Navbar: React.FC = function () {
     return () => {
       window.removeEventListener('scroll', listener);
     };
-  }, []);
+  }, [setSticky]);
 
   return (
     <nav
       className={cls(
-        'fixed top-0 left-0 w-screen bg-blur bg-white text-base z-20 transition-all delay-300',
+        'fixed top-0 left-0 w-screen bg-white text-base z-20 transition-all delay-300',
         {
-          'bg-opacity-50': sticky,
+          'bg-opacity-50 bg-blur': sticky,
           'bg-opacity-0': !sticky,
         }
       )}

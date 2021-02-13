@@ -2,19 +2,22 @@ import cls from 'classnames';
 import ActiveLink from 'components/ActiveLink';
 import Container from 'components/Container';
 import Logo from 'components/Logo';
-import { Cart } from 'context/cart';
+import { Cart as C } from 'context/cart';
+import { NavbarIsStickyContext } from 'context/NavbarIsSticky';
 import Link from 'next/link';
-import CartLogo from 'public/icons/cart.svg';
 import UserLogo from 'public/icons/user.svg';
+import { useContext } from 'react';
 import { navItems } from '.';
+import Cart from './Cart';
 
-type props = { className?: string; cart: Cart };
+type props = { className?: string; cart: C };
 const LargeScreenNavbar: React.FC<props> = function ({ className = '', cart }) {
+  const { sticky } = useContext(NavbarIsStickyContext);
   return (
     <Container
       className={cls(
         className,
-        ' flex flex-row justify-between items-center py-5'
+        ' flex flex-row justify-between items-center py-3'
       )}
     >
       <div className="flex flex-row justify-between items-center">
@@ -25,7 +28,7 @@ const LargeScreenNavbar: React.FC<props> = function ({ className = '', cart }) {
               key={i}
               href={navItem.href}
               regex={navItem.regex}
-              className="px-4 py-1 rounded-lg transition-all transform hover:scale-110 focus:scale-110"
+              className="px-4 py-1 rounded-lg transition-all transform hover:scale-105 focus:scale-105"
               activeClassName="bg-blue-400 text-white bg-opacity-75"
             >
               <span>{navItem.text}</span>
@@ -33,18 +36,25 @@ const LargeScreenNavbar: React.FC<props> = function ({ className = '', cart }) {
           ))}
         </div>
       </div>
-      <div className="flex flex-row space-x-6 items-center">
+      <div
+        className={cls(
+          'flex flex-row space-x-6 items-center rounded transition-all bg-gray-100 delay-300',
+          {
+            'bg-blur bg-opacity-50': !sticky,
+            'bg-opacity-0': sticky,
+          }
+        )}
+      >
         <Link href="/auth/signin">
-          <div className="flex flex-row items-center justify-center cursor-pointer">
+          <div className="flex flex-row items-center justify-center cursor-pointer p-2">
             <UserLogo className="text-black fill-current mr-4 h-6" />
             <span className="">Se connecter</span>
           </div>
         </Link>
         <Link href="/cart">
-          <div className="flex flex-row items-center justify-center cursor-pointer">
-            <CartLogo className="text-black fill-current mr-4 h-6" />
-            <span>{cart.items.length}</span>
-          </div>
+          <span>
+            <Cart cart={cart} />
+          </span>
         </Link>
       </div>
     </Container>

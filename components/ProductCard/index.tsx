@@ -1,12 +1,13 @@
 import cls from 'classnames';
-import { motion } from 'framer-motion';
 import Image from 'components/Image';
+import { CartActionKind, CartContext } from 'context/cart';
+import { motion } from 'framer-motion';
 import Link from 'next/link';
 import CartEmptySVG from 'public/icons/cart-empty.svg';
-import { Product } from 'utils/types';
 import { useContext, useState } from 'react';
-import AddSVG from 'public/icons/plus.svg';
-import { CartActionKind, CartContext } from 'context/cart';
+import { Product } from 'utils/types';
+import AddToCartAnimation from './AddToCartAnimation';
+import AddToCartButton from './AddToCartButton';
 type props = {
   product: Product;
   variant?: 'card' | 'transparent';
@@ -21,8 +22,10 @@ const ProductCard: React.FC<props> = function ({
   const { dispatch } = useContext(CartContext);
   const enStock = !!product.quantite;
   const [hover, setHover] = useState(false);
+  const [addToCartAnimation, setAddToCartAnimation] = useState(false);
   const onAddToCart = (e) => {
     e.stopPropagation();
+    setAddToCartAnimation(true);
     dispatch({
       type: CartActionKind.Add,
       payload: { product, quantity: 1 },
@@ -54,9 +57,11 @@ const ProductCard: React.FC<props> = function ({
                 objectFit="cover"
               />
             </div>
-            <div className="w-full flex flex-row items-center justify-between">
+            <div className="w-full flex flex-row items-center justify-between pr-3">
               <div>
-                <p className="pl-4 pt-3 pb-1 font-bold">{product.nom}</p>
+                <p className="pl-4 pt-3 pb-1 font-bold truncate overflow-ellipsis overflow-hidden">
+                  {product.nom}
+                </p>
                 {!onSale(product) ? (
                   <p className="pl-4 pb-6">{product.prix} €</p>
                 ) : (
@@ -70,15 +75,17 @@ const ProductCard: React.FC<props> = function ({
                   </div>
                 )}
               </div>
-              <motion.div
-                animate={hover && enStock ? 'show' : 'hidden'}
-                variants={{ hidden: { opacity: 0 }, show: { opacity: 1 } }}
-                onClick={onAddToCart}
-                role="button"
-                aria-hidden
-              >
-                <AddSVG className="w-8 h-8 rounded-full border border-gray-400 text-gray-400 p-1 m-3 hover:border-gray-700 hover:text-gray-600 transition-all" />
-              </motion.div>
+              {addToCartAnimation ? (
+                <AddToCartAnimation
+                  onAnimationDone={() => setAddToCartAnimation(false)}
+                />
+              ) : (
+                <AddToCartButton
+                  enStock={enStock}
+                  hover={hover}
+                  onAddToCart={onAddToCart}
+                />
+              )}
             </div>
           </div>
           {!enStock && (

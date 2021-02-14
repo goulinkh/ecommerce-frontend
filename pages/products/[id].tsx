@@ -16,7 +16,7 @@ import HalfStarSVG from 'public/icons/half-star.svg';
 import MinusSVG from 'public/icons/minus.svg';
 import PlusSVG from 'public/icons/plus.svg';
 import { useContext, useState } from 'react';
-import { getAllProducts } from 'utils/products';
+import { getAllProducts, getTotalPriceWithPromo } from 'utils/products';
 import { Product as P } from 'utils/types';
 type props = { product: P };
 
@@ -25,6 +25,7 @@ const Product: React.FC<props> = function ({ product }) {
   if (router.isFallback) {
     return <></>;
   }
+  const price = getTotalPriceWithPromo(product);
 
   const enStock = !!product.quantite;
   return (
@@ -35,8 +36,19 @@ const Product: React.FC<props> = function ({ product }) {
           <div className="w-72 md:w-full flex flex-col justify-start items-start space-y-5 my-4">
             <h1 className="text-4xl font-bold">{product.nom}</h1>
             {/* Price & Review */}
-            <div className="flex flex-row justify-start items-center pb-6">
-              <span className="text-xl mr-14">{product.prix} €</span>
+            <div className="flex flex-row justify-between items-center w-full pb-6">
+              {!price.isOnPromo ? (
+                <span className="text-xl mr-14">{product.prix} €</span>
+              ) : (
+                <div className="flex flex-row items-center space-x-2">
+                  <p className="text-blue-400 font-bold text-xl">
+                    {price.price} €
+                  </p>
+                  <p className="text-sm text-gray-700 line-through">
+                    {price.originalPrice} €
+                  </p>
+                </div>
+              )}
               <div className="flex flex-row space-x-1 items-center">
                 <FullStarSVG className="w-6 h-6" />
                 <FullStarSVG className="w-6 h-6" />
@@ -51,14 +63,12 @@ const Product: React.FC<props> = function ({ product }) {
               <NoStockSection />
             )}
             <h2 className="text-xl font-bold">Description</h2>
-            <p className="overflow-ellipsis overflow-hidden w-full prose">
-              {product.descriptionSummary.split(/\s/).slice(0, 30).join(' ')}
-              ...
-              <a
-                href="#description"
-                style={{ textDecoration: 'none !important' }}
-                className="ml-4"
-              >
+            <p>
+              <span className="overflow-ellipsis overflow-hidden w-full prose">
+                {product.descriptionSummary.split(/\s/).slice(0, 30).join(' ')}
+                ...
+              </span>
+              <a href="#description" className="ml-4 no-underline">
                 <span className="text-blue-400 font-bold cursor-pointer">
                   voir plus
                 </span>

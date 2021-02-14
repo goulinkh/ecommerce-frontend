@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import CartEmptySVG from 'public/icons/cart-empty.svg';
 import { useContext, useState } from 'react';
+import { getTotalPriceWithPromo } from 'utils/products';
 import { Product } from 'utils/types';
 import AddToCartAnimation from './AddToCartAnimation';
 import AddToCartButton from './AddToCartButton';
@@ -31,7 +32,7 @@ const ProductCard: React.FC<props> = function ({
       payload: { product, quantity: 1 },
     });
   };
-
+  const price = getTotalPriceWithPromo(product);
   return (
     <motion.div
       onMouseEnter={() => setHover(true)}
@@ -62,15 +63,13 @@ const ProductCard: React.FC<props> = function ({
                 <p className="pl-4 pt-3 pb-1 font-bold truncate overflow-ellipsis overflow-hidden">
                   {product.nom}
                 </p>
-                {!onSale(product) ? (
-                  <p className="pl-4 pb-6">{product.prix} €</p>
+                {!price.isOnPromo ? (
+                  <p className="pl-4 pb-6">{price.price} €</p>
                 ) : (
                   <div className="pl-4 pb-6 flex flex-row items-center space-x-2">
-                    <p className="text-blue-400 font-bold">
-                      {getSalePrice(product)} €
-                    </p>
+                    <p className="text-blue-400 font-bold">{price.price} €</p>
                     <p className="text-sm text-gray-700 line-through">
-                      {product.prix} €
+                      {price.originalPrice} €
                     </p>
                   </div>
                 )}
@@ -98,22 +97,5 @@ const ProductCard: React.FC<props> = function ({
     </motion.div>
   );
 };
-
-function getSalePrice(product: Product) {
-  if (!onSale(product)) {
-    return product.prix;
-  }
-  if (product.promotion.new_price) return product.promotion.new_price;
-  if (product.promotion.substract_price)
-    return product.prix - product.promotion.substract_price;
-  if (product.promotion.percantage_reduction) {
-    const pricePercentage = 100 - product.promotion.percantage_reduction;
-    return (product.prix * pricePercentage) / 100;
-  }
-}
-
-function onSale(product: Product) {
-  return !!product.promotion;
-}
 
 export default ProductCard;

@@ -3,20 +3,27 @@ import Button from 'components/Button';
 import Container from 'components/Container';
 import Image from 'components/Image';
 import Layout from 'components/Layout';
-import { CartActionKind, CartContext } from 'context/cart';
+import { Cart as C, CartActionKind, CartContext } from 'context/cart';
 import MinusSVG from 'public/icons/minus.svg';
 import PlusSVG from 'public/icons/plus.svg';
 import TrashSVG from 'public/icons/trash.svg';
 import { useContext } from 'react';
+import { getTotalPriceWithPromo } from 'utils/products';
+
 const Cart: React.FC = function () {
   const { cart, dispatch } = useContext(CartContext);
+  const productsPrices = {};
+  cart.items.forEach((i) => {
+    productsPrices[i.product.id] = getTotalPriceWithPromo(i.product);
+  });
+  const total = getTotalPrice(cart, productsPrices);
   return (
     <Layout className="h-screen flex flex-col justify-between ">
       <Container className="grid grid-rows-2 md:grid-rows-none md:grid-cols-2 gap-12 w-full md:h-3/5 py-6">
         <div className="rounded-lg shadow-md bg-white p-5 flex flex-col w-full md:h-3/5">
           <div className="font-bold flex flex-row items-center justify-between mb-5">
             <h2 className="text-2xl">Votre panier</h2>
-            <span>Prix total: 650 €</span>
+            <span>Prix total: {total} €</span>
           </div>
           <div className="overflow-y-auto">
             {cart.items.map((item, i) => {
@@ -25,7 +32,7 @@ const Cart: React.FC = function () {
               const canAddQuantity =
                 item.product.quantite == -1 ||
                 item.quantity < item.product.quantite;
-
+              const productPrice = productsPrices[item.product.id];
               return (
                 <div
                   key={i}
@@ -42,7 +49,14 @@ const Cart: React.FC = function () {
                   <div className="h-full grid grid-rows-2 items-center flex-1">
                     <p>{item.product.nom}</p>
                     <p className="text-sm text-gray-600">
-                      Prix unité: <span>{item.product.prix} €</span>
+                      Prix unité:{' '}
+                      <span
+                        className={cls({
+                          'text-blue-400': productPrice.isOnPromo,
+                        })}
+                      >
+                        {productPrice.price} €
+                      </span>
                     </p>
                   </div>
                   <div className="h-full grid grid-rows-2  items-center">
@@ -95,7 +109,9 @@ const Cart: React.FC = function () {
                     </div>
                     <p className="text-sm">
                       Sous-total:
-                      <span>{item.product.prix * item.quantity} €</span>
+                      <span className="pl-2">
+                        {productPrice.price * item.quantity} €
+                      </span>
                     </p>
                   </div>
                 </div>
@@ -107,13 +123,14 @@ const Cart: React.FC = function () {
           <p className="text-xl font-bold">Détails</p>
           <div className="space-y-2">
             <p>
-              Prix total des articles: <span>520 €</span>
+              Prix total des articles: <span>{total} €</span>
             </p>
             <p>
-              VAT(20%): <span>130 €</span>
+              VAT(20%): <span>{total * 0.2} €</span>
             </p>
             <p>
-              Prix total: <span className="font-bold">650 €</span>
+              Prix total:{' '}
+              <span className="font-bold">{total + total * 0.2} €</span>
             </p>
           </div>
           <div>
@@ -121,7 +138,8 @@ const Cart: React.FC = function () {
             <p>TODO: faire le sélection de mode de livraison</p>
           </div>
           <p className="text-xl font-bold">
-            Total à payer <span className="ml-5 text-blue-400">650 €</span>
+            Total à payer{' '}
+            <span className="ml-5 text-blue-400">{total + total * 0.2} €</span>
           </p>
           <Button className="w-full">Passer ma commande</Button>
         </div>
@@ -131,3 +149,13 @@ const Cart: React.FC = function () {
 };
 
 export default Cart;
+
+function getTotalPrice(cart: C, prices: any) {
+  let total = 0;
+  for (let i = 0; i < cart.items.length; i++) {
+    const item = cart.items[i];
+    const productPrice = prices[item.product.id];
+    total += item.quantity * productPrice.price;
+  }
+  return total;
+}

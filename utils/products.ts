@@ -53,3 +53,38 @@ function parseDescription(markdownDescription: string) {
     .join(' ');
   return { description: root.toString(), descriptionSummary };
 }
+
+export function getTotalPriceWithPromo(
+  product: Product
+): { price: number; isOnPromo: boolean; originalPrice: number } {
+  if (!onSale(product)) {
+    return {
+      price: product.prix,
+      isOnPromo: false,
+      originalPrice: product.prix,
+    };
+  }
+  if (product.promotion.new_price)
+    return {
+      price: product.promotion.new_price,
+      originalPrice: product.prix,
+      isOnPromo: true,
+    };
+  if (product.promotion.substract_price)
+    return {
+      originalPrice: product.prix,
+      price: product.prix - product.promotion.substract_price,
+      isOnPromo: true,
+    };
+  if (product.promotion.percantage_reduction) {
+    const pricePercentage = 100 - product.promotion.percantage_reduction;
+    return {
+      originalPrice: product.prix,
+      price: (product.prix * pricePercentage) / 100,
+      isOnPromo: true,
+    };
+  }
+}
+export function onSale(product: Product): boolean {
+  return !!product.promotion;
+}

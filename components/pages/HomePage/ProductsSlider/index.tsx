@@ -26,10 +26,21 @@ const ProductsSlider: React.FC<props> = function ({
   const xRange = useTransform(scrollXProgress, [0, 1], ['0%', '100%']);
   const [allProductsAreInView, setAllProductsAreInView] = useState(true);
   let productScrollIndex = 0;
+  const updateScrollIndex = () => {
+    const el = productsListRef.current;
+    const productsDivs: HTMLElement[] = Array.from(el.children);
+    if (productsDivs.length == 0) return;
+    const elementsInViewport = productsDivs.filter((e) => elementInViewport(e));
+    const lastElementIndex = productsDivs.findIndex(
+      (e) => e === elementsInViewport[elementsInViewport.length - 1]
+    );
+    productScrollIndex = lastElementIndex !== -1 ? lastElementIndex : 0;
+  };
   const scrollProductsList = (direction) => {
     const el = productsListRef.current;
     const productsDivs: HTMLElement[] = Array.from(el.children);
     if (productsDivs.length == 0) return;
+    // Revenir au premiere element en cas d'arriver au dernier element
     if (elementInViewport(productsDivs[productsDivs.length - 1])) {
       productScrollIndex = 0;
     } else {
@@ -43,19 +54,22 @@ const ProductsSlider: React.FC<props> = function ({
   };
   // Vérifier si tous les produits sont affiché
   useEffect(() => {
-    const listener = () => {
-      const el = productsListRef.current;
-      const productsDivs: HTMLElement[] = Array.from(el.children);
+    const el: HTMLElement = productsListRef.current;
+    const checkToHideScrollControlButtons = () => {
+      const productsDivs: HTMLElement[] = Array.from(el.children as any);
       setAllProductsAreInView(
         !productsDivs.length || productsDivs.every((e) => elementInViewport(e))
       );
     };
-    listener();
-    window.addEventListener('resize', listener);
+    checkToHideScrollControlButtons();
+    window.addEventListener('resize', checkToHideScrollControlButtons);
+    el.addEventListener('scroll', updateScrollIndex);
     return () => {
-      window.removeEventListener('resize', listener);
+      window.removeEventListener('resize', checkToHideScrollControlButtons);
+      el.removeEventListener('scroll', updateScrollIndex);
     };
   }, [setAllProductsAreInView]);
+
   return (
     <InViewAnimation
       className={cls(

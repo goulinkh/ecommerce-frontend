@@ -7,6 +7,7 @@ import Link from 'next/link';
 import CartLogo from 'public/icons/cart.svg';
 import UserLogo from 'public/icons/user.svg';
 import { navItems } from '..';
+import Cart from '../Cart';
 import { MenuToggle } from './MenuToggle';
 
 type props = { className?: string };
@@ -30,10 +31,9 @@ const MobileNavbar: React.FC<props> = function ({ className = '' }) {
             </div>
           </Link>
           <Link href="/cart">
-            <div className="flex flex-row items-center justify-center cursor-pointer">
-              <CartLogo className="text-black fill-current mr-2 h-5 w-5" />
-              <span>0</span>
-            </div>
+            <span>
+              <Cart />
+            </span>
           </Link>
           <motion.div
             className="fixed right-0 top-0 h-screen bg-linear-1 bg-opacity-90   w-10/12 rounded-tl-xl rounded-bl-xl "

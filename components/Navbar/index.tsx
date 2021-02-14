@@ -36,7 +36,7 @@ const Navbar: React.FC = function () {
       )}
     >
       <MobileNavbar className="lg:hidden" />
-      <LargeScreenNavbar className="hidden lg:flex" cart={cart} />
+      <LargeScreenNavbar className="hidden lg:flex"/>
     </nav>
   );
 };

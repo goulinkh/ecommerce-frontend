@@ -4,7 +4,7 @@ import ProductCard from 'components/ProductCard';
 import { motion, useElementScroll, useTransform } from 'framer-motion';
 import AnchorLeftSVG from 'public/icons/anchor-left.svg';
 import AnchorRightSVG from 'public/icons/anchor-right.svg';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Product } from 'utils/types';
 import ProductSliderHeader from './Header';
 import ProgressBar from './ProgressBar';
@@ -24,12 +24,38 @@ const ProductsSlider: React.FC<props> = function ({
   const productsListRef = useRef<any>();
   const { scrollXProgress } = useElementScroll(productsListRef);
   const xRange = useTransform(scrollXProgress, [0, 1], ['0%', '100%']);
+  const [allProductsAreInView, setAllProductsAreInView] = useState(true);
+  let productScrollIndex = 0;
   const scrollProductsList = (direction) => {
     const el = productsListRef.current;
-    if (el != undefined) {
-      el.scrollLeft = el.scrollLeft + 200 * direction;
+    const productsDivs: HTMLElement[] = Array.from(el.children);
+    if (productsDivs.length == 0) return;
+    if (elementInViewport(productsDivs[productsDivs.length - 1])) {
+      productScrollIndex = 0;
+    } else {
+      productScrollIndex = productScrollIndex + direction;
     }
+    productsDivs[productScrollIndex % productsDivs.length].scrollIntoView({
+      behavior: 'smooth',
+      block: 'nearest',
+      inline: 'start',
+    });
   };
+  // Vérifier si tous les produits sont affiché
+  useEffect(() => {
+    const listener = () => {
+      const el = productsListRef.current;
+      const productsDivs: HTMLElement[] = Array.from(el.children);
+      setAllProductsAreInView(
+        !productsDivs.length || productsDivs.every((e) => elementInViewport(e))
+      );
+    };
+    listener();
+    window.addEventListener('resize', listener);
+    return () => {
+      window.removeEventListener('resize', listener);
+    };
+  }, [setAllProductsAreInView]);
   return (
     <InViewAnimation
       className={cls(
@@ -48,21 +74,39 @@ const ProductsSlider: React.FC<props> = function ({
           <ProductCard key={index} product={product} />
         ))}
       </motion.div>
-      <div className="flex flex-col items-start justify-between space-y-4">
-        <ProgressBar progressWidth={xRange} width={44} className="w-40" />
-        <div className="flex flex-row items-center justify-start space-x-4 text-gray-500">
-          <AnchorLeftSVG
-            className="h-10 p-2 w-auto hover:text-gray-900 cursor-pointer"
-            onClick={() => scrollProductsList(-1)}
-          />
-          <AnchorRightSVG
-            className="h-10 p-2 w-auto hover:text-gray-900 cursor-pointer"
-            onClick={() => scrollProductsList(1)}
-          />
+      {/* Afficher seulement si les produits dépasse la width (scroll) */}
+      {!allProductsAreInView && (
+        <div className="flex flex-col items-start justify-between space-y-4">
+          <ProgressBar progressWidth={xRange} width={44} className="w-40" />
+          <div className="flex flex-row items-center justify-start space-x-4 text-gray-500">
+            <AnchorLeftSVG
+              className="h-10 p-2 w-auto hover:text-gray-900 cursor-pointer"
+              onClick={() => scrollProductsList(-1)}
+            />
+            <AnchorRightSVG
+              className="h-10 p-2 w-auto hover:text-gray-900 cursor-pointer"
+              onClick={() => scrollProductsList(1)}
+            />
+          </div>
         </div>
-      </div>
+      )}
     </InViewAnimation>
   );
 };
 
 export default ProductsSlider;
+
+function elementInViewport(el) {
+  const rect = el.getBoundingClientRect();
+
+  return (
+    rect.top >= 0 &&
+    rect.left >= 0 &&
+    rect.bottom <=
+      (window.innerHeight ||
+        document.documentElement.clientHeight) /* or $(window).height() */ &&
+    rect.right <=
+      (window.innerWidth ||
+        document.documentElement.clientWidth) /* or $(window).width() */
+  );
+}

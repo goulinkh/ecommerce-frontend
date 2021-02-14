@@ -10,8 +10,8 @@ import { useContext } from 'react';
 import { navItems } from '.';
 import Cart from './Cart';
 
-type props = { className?: string; cart: C };
-const LargeScreenNavbar: React.FC<props> = function ({ className = '', cart }) {
+type props = { className?: string };
+const LargeScreenNavbar: React.FC<props> = function ({ className = '' }) {
   const { sticky } = useContext(NavbarIsStickyContext);
   return (
     <Container
@@ -53,7 +53,7 @@ const LargeScreenNavbar: React.FC<props> = function ({ className = '', cart }) {
         </Link>
         <Link href="/cart">
           <span>
-            <Cart cart={cart} />
+            <Cart />
           </span>
         </Link>
       </div>

@@ -1,13 +1,11 @@
-import { Cart as C } from 'context/cart';
+import { Cart as C, CartContext } from 'context/cart';
 import { motion, useAnimation } from 'framer-motion';
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import CartLogo from 'public/icons/cart.svg';
 
-type props = {
-  cart: C;
-};
-
-const Cart: React.FC<props> = ({ cart }) => {
+type props = any;
+const Cart: React.FC<props> = () => {
+  const { cart } = useContext(CartContext);
   const [cartLength, setCartLength] = useState(cart.items.length);
   const cartControls = useAnimation();
   const cartLengthRef = useRef(null);

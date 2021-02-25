@@ -19,14 +19,22 @@ const elementAnimationVariants = {
   },
 };
 
-const ContactForm: React.FC = function () {
+type props = {
+  onSendSuccess: any;
+  onSendFailure: any;
+};
+
+const ContactForm: React.FC<props> = function ({
+  onSendSuccess,
+  onSendFailure,
+}) {
   const { executeRecaptcha } = useGoogleReCaptcha();
   const [typeDeDemande, setTypeDeDemande] = useState('special-command');
   const [message, setMessage] = useState('');
   const [email, setEmail] = useState('');
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    await fetch(`/api/contact`, {
+    const response = await fetch(`/api/contact`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -38,9 +46,25 @@ const ContactForm: React.FC = function () {
         recaptchaToken: await executeRecaptcha('contact_form'),
       }),
     });
-    setTypeDeDemande('');
-    setEmail('');
-    setMessage('');
+    if (!response.ok)
+      onSendFailure({
+        title: "Echec d'envoie de votre message",
+        message: "Nous n'avons pas réussi à communiquer avec le serveur",
+      });
+    else {
+      const result = await response.json();
+      if (result.error)
+        onSendFailure({
+          title: "Echec d'envoie de votre message",
+          message: result.message,
+        });
+      else {
+        setTypeDeDemande('');
+        setEmail('');
+        setMessage('');
+        onSendSuccess({ title: result.message });
+      }
+    }
   };
   return (
     <form className="md:w-1/2 lg:w-1/3 z-10" onSubmit={handleFormSubmit}>
@@ -92,7 +116,7 @@ const ContactForm: React.FC = function () {
         >
           <TextInput
             id="contact-email"
-            type="email"
+            type="text"
             placeholder="Votre mail ..."
             prefix={
               (<EmailSVG className="w-6 bg-none mr-4 text-gray-600" />) as any

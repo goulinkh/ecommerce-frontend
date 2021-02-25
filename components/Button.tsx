@@ -8,6 +8,7 @@ type props = {
   disabled?: boolean;
   onClick?: any;
   type?: 'button' | 'submit' | 'reset';
+  size?: 'small';
 };
 
 const Button: React.FC<props> = function ({
@@ -17,6 +18,7 @@ const Button: React.FC<props> = function ({
   children,
   onClick,
   type,
+  size,
 }) {
   return (
     <motion.button
@@ -24,7 +26,7 @@ const Button: React.FC<props> = function ({
       onClick={onClick}
       className={cls(
         className,
-        'select-none inline-flex flex-row items-center justify-center space-x-1 px-6 py-2 rounded-md fill-current font-bold text-lg whitespace-nowrap',
+        'select-none inline-flex flex-row items-center justify-center space-x-1 px-6 py-2 rounded-md fill-current   whitespace-nowrap',
         {
           'bg-linear-1 text-white ring-blue-300 border-blue-400':
             fill === 'linear',
@@ -32,6 +34,10 @@ const Button: React.FC<props> = function ({
             fill === 'outline',
           'bg-blue-400 text-white ring-blue-300': fill === 'primary',
           'cursor-default': disabled,
+
+          // Size
+          'text-lg font-bold': size !== 'small',
+          'text-base': size === 'small',
         }
       )}
       style={{ filter: disabled ? 'grayscale(0.8)' : '' }}

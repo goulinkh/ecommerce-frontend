@@ -7,6 +7,7 @@ type props = {
   children: React.ReactNode;
   disabled?: boolean;
   onClick?: any;
+  type?: 'button' | 'submit' | 'reset';
 };
 
 const Button: React.FC<props> = function ({
@@ -15,6 +16,7 @@ const Button: React.FC<props> = function ({
   disabled = false,
   children,
   onClick,
+  type,
 }) {
   return (
     <motion.button
@@ -36,6 +38,7 @@ const Button: React.FC<props> = function ({
       whileHover={{ scale: !disabled ? 1.05 : 1 }}
       whileTap={{ scale: 1 }}
       aria-label="Center Align"
+      type={type}
     >
       {children}
     </motion.button>

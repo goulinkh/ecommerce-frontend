@@ -21,7 +21,12 @@ module.exports = {
   ],
   rules: {
     // Include .prettierrc.js rules
-    'prettier/prettier': ['warn', {}, { usePrettierrc: true }],
+    'prettier/prettier': [
+      'warn',
+      {},
+      { usePrettierrc: true },
+      { endOfLine: 'auto' },
+    ],
     'react/prop-types': 'off',
     'react/react-in-jsx-scope': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',

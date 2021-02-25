@@ -60,9 +60,9 @@ const Cart: React.FC = function () {
                     </p>
                   </div>
                   <div className="h-full grid grid-rows-2  items-center">
-                    <div className="flex flex-row items-center justify-between bg-white rounded shadow h-11 transition-all ">
+                    <div className="flex flex-row items-center justify-between bg-white rounded shadow h-11 transition-all px-2">
                       <div
-                        className={cls('p-2 hover:bg-gray-100 rounded', {
+                        className={cls('p-1 hover:bg-gray-100 rounded', {
                           'hover:text-red-500': !canSubtract,
                         })}
                         onClick={() => {
@@ -90,7 +90,7 @@ const Cart: React.FC = function () {
                         {item.quantity}
                       </span>
                       <div
-                        className={cls('p-2', {
+                        className={cls('p-1', {
                           'opacity-50': !canAddQuantity,
                           'transition-all hover:bg-gray-100 rounded': canAddQuantity,
                         })}
@@ -120,7 +120,7 @@ const Cart: React.FC = function () {
           </div>
         </div>
         <div className="rounded-lg shadow-md bg-white py-5 px-8 flex flex-col justify-evenly h-3/5">
-          <p className="text-xl font-bold">Détails</p>
+          <h3 className="text-xl font-bold mt-3 mb-1">Détails</h3>
           <div className="space-y-2">
             <p>
               Prix total des articles: <span>{total} €</span>
@@ -134,8 +134,36 @@ const Cart: React.FC = function () {
             </p>
           </div>
           <div>
-            <h3 className="text-xl font-bold">Méthode de livraison</h3>
-            <p>TODO: faire le sélection de mode de livraison</p>
+            <h3 className="text-xl font-bold mt-3 mb-1">
+              Méthode de livraison
+            </h3>
+            <div className="flex flex-col items-start space-y-1">
+              <div className="inline-flex items-center">
+                <input
+                  type="radio"
+                  name="livraison"
+                  value="colissimo"
+                  id="colissimo"
+                  className="form-radio"
+                  checked
+                />
+                <label className="ml-2 cursor-pointer transition-all hover:text-gray-500" htmlFor="colissimo">
+                  Colissimo
+                </label>
+              </div>
+              <div className="inline-flex items-center">
+                <input
+                  type="radio"
+                  name="livraison"
+                  value="mondial-relay"
+                  id="mondial-relay"
+                  className="form-radio"
+                />
+                <label className="ml-2 cursor-pointer transition-all hover:text-gray-500" htmlFor="mondial-relay">
+                  Mondial relay
+                </label>
+              </div>
+            </div>
           </div>
           <p className="text-xl font-bold">
             Total à payer{' '}

@@ -24,12 +24,6 @@ const NavTools: React.FC<props> = ({ allCatalogues }) => {
           ))}
         </SubSectionItemContainer>
       </SubSectionContainer>
-      {/* Price slider section */}
-      <SubSectionContainer>
-        <SubSectionTitle text="Prix" />
-        {/* TODO: make price slider */}
-        <p>TODO: slider de filtrage de prix</p>
-      </SubSectionContainer>
       {/* Materials section */}
       <SubSectionContainer>
         <SubSectionTitle text="Matériels" />

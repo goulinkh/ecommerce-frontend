@@ -42,6 +42,13 @@ module.exports = {
         'zoom-in': 'zoom-in',
       },
     },
+    customForms: theme => ({
+      default: {
+        radio: {
+          color: theme('colors.blue.400'),
+        },
+      },
+    })
   },
   variants: {
     extend: { borderWidth: ['last'] },

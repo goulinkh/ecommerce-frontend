@@ -33,6 +33,7 @@ const ProductCard: React.FC<props> = function ({
     });
   };
   const price = getTotalPriceWithPromo(product);
+
   return (
     <motion.div
       onMouseEnter={() => setHover(true)}
@@ -79,11 +80,12 @@ const ProductCard: React.FC<props> = function ({
                   onAnimationDone={() => setAddToCartAnimation(false)}
                 />
               ) : (
-                <AddToCartButton
-                  enStock={enStock}
-                  hover={hover}
-                  onAddToCart={onAddToCart}
-                />
+                <div className={cls({ 'opacity-0': !hover })}>
+                  <AddToCartButton
+                    enStock={enStock}
+                    onAddToCart={onAddToCart}
+                  />
+                </div>
               )}
             </div>
           </div>

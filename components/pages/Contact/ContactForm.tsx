@@ -32,8 +32,11 @@ const ContactForm: React.FC<props> = function ({
   const [typeDeDemande, setTypeDeDemande] = useState('special-command');
   const [message, setMessage] = useState('');
   const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(false);
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    if (loading) return;
     const response = await fetch(`/api/contact`, {
       method: 'POST',
       headers: {
@@ -46,6 +49,7 @@ const ContactForm: React.FC<props> = function ({
         recaptchaToken: await executeRecaptcha('contact_form'),
       }),
     });
+    setLoading(false);
     if (!response.ok)
       onSendFailure({
         title: "Echec d'envoie de votre message",
@@ -116,7 +120,7 @@ const ContactForm: React.FC<props> = function ({
         >
           <TextInput
             id="contact-email"
-            type="text"
+            type="email"
             placeholder="Votre mail ..."
             prefix={
               (<EmailSVG className="w-6 bg-none mr-4 text-gray-600" />) as any
@@ -162,9 +166,37 @@ const ContactForm: React.FC<props> = function ({
           variants={elementAnimationVariants}
           className="w-full flex flex-col space-y-2"
         >
-          <Button fill="linear" className="w-full" type="submit">
-            <SendSVG className="h-5 w-5" />
-            <span>Envoyer</span>
+          <Button
+            fill="linear"
+            className="w-full"
+            type="submit"
+            disabled={loading}
+          >
+            {loading ? (
+              <>
+                <svg className="h-5" viewBox="-1 -1 39 39" fill="none">
+                  <g stroke="currentColor" strokeWidth="2">
+                    <circle strokeOpacity=".5" cx="18" cy="18" r="18" />
+                    <path d="M36 18c0-9.94-8.06-18-18-18">
+                      <animateTransform
+                        attributeName="transform"
+                        type="rotate"
+                        to="0 18 18"
+                        from="360 18 18"
+                        dur="1s"
+                        repeatCount="indefinite"
+                      />
+                    </path>
+                  </g>
+                </svg>
+                <span>En cours d'envoie</span>
+              </>
+            ) : (
+              <>
+                <SendSVG className="h-5" />
+                <span>Envoyer</span>
+              </>
+            )}
           </Button>
         </motion.div>
       </motion.div>

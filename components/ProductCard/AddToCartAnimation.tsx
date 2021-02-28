@@ -20,6 +20,9 @@ const AddToCartAnimation: React.FC<props> = ({ onAnimationDone }) => {
         width: '0rem',
         opacity: 0,
         transition: { delay: 0.8, duration: 0.3, ease: 'easeOut' },
+        transitionEnd: {
+          opacity: 0,
+        },
       });
       await checkMarkPathControls.start({
         clipPath: 'inset(0px 0% 0px 0px)',

@@ -2,15 +2,14 @@ import { motion } from 'framer-motion';
 import AddSVG from 'public/icons/plus.svg';
 
 type props = {
-  hover: boolean;
   enStock: boolean;
   onAddToCart: any;
 };
-const AddToCartButton: React.FC<props> = ({ hover, enStock, onAddToCart }) => {
+const AddToCartButton: React.FC<props> = ({ enStock, onAddToCart }) => {
   return (
     <motion.div
       initial="hidden"
-      animate={hover && enStock ? 'show' : 'hidden'}
+      animate={enStock ? 'show' : 'hidden'}
       variants={{ hidden: { opacity: 0 }, show: { opacity: 1 } }}
       onClick={onAddToCart}
       role="button"

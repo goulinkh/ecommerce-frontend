@@ -19,7 +19,7 @@ const Nouveaute: React.FC<props> = function ({ products }) {
     return <></>;
   }
   return (
-    <Layout navbarOverlap>
+    <Layout navbarOverlap title="Nouveauté">
       {/* cover */}
       <CoverPhoto special />
       <Container className="flex flex-row my-14">

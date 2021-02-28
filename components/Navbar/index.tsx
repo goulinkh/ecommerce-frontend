@@ -12,10 +12,15 @@ export const navItems = [
   { text: 'Contact', href: '/contact' },
 ];
 
-const Navbar: React.FC = function () {
+type props = {
+  sticky?: boolean;
+};
+
+const Navbar: React.FC<props> = function ({ sticky: checkIfSticky = true }) {
   const { sticky, setSticky } = useContext(NavbarIsStickyContext);
   const { cart } = useContext(CartContext);
   useEffect(() => {
+    if (!checkIfSticky) return;
     const listener = () => {
       setSticky(window.scrollY > 100);
     };
@@ -30,13 +35,13 @@ const Navbar: React.FC = function () {
       className={cls(
         'fixed top-0 left-0 w-screen bg-white text-base z-20 transition-all delay-300',
         {
-          'bg-opacity-50 bg-blur': sticky,
+          'bg-opacity-50 bg-blur': sticky || !checkIfSticky,
           'bg-opacity-0': !sticky,
         }
       )}
     >
       <MobileNavbar className="lg:hidden" />
-      <LargeScreenNavbar className="hidden lg:flex"/>
+      <LargeScreenNavbar className="hidden lg:flex" />
     </nav>
   );
 };

@@ -73,7 +73,7 @@ const ContactForm: React.FC<props> = function ({
   return (
     <form className="md:w-1/2 lg:w-1/3 z-10" onSubmit={handleFormSubmit}>
       <motion.div
-        className="flex flex-col items-start justify-center space-y-12 pr-10 w-full"
+        className="flex flex-col items-start justify-center space-y-12 px-10 w-full"
         initial="hidden"
         animate="visible"
         variants={{

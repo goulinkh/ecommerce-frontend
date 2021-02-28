@@ -18,7 +18,10 @@ const Cart: React.FC = function () {
   });
   const total = getTotalPrice(cart, productsPrices);
   return (
-    <Layout className="h-screen flex flex-col justify-between ">
+    <Layout
+      className="h-screen flex flex-col justify-between "
+      title="Mon panier"
+    >
       <Container className="grid grid-rows-2 md:grid-rows-none md:grid-cols-2 gap-12 w-full md:h-3/5 py-6">
         <div className="rounded-lg shadow-md bg-white p-5 flex flex-col w-full md:h-3/5">
           <div className="font-bold flex flex-row items-center justify-between mb-5">
@@ -147,7 +150,10 @@ const Cart: React.FC = function () {
                   className="form-radio"
                   checked
                 />
-                <label className="ml-2 cursor-pointer transition-all hover:text-gray-500" htmlFor="colissimo">
+                <label
+                  className="ml-2 cursor-pointer transition-all hover:text-gray-500"
+                  htmlFor="colissimo"
+                >
                   Colissimo
                 </label>
               </div>
@@ -159,7 +165,10 @@ const Cart: React.FC = function () {
                   id="mondial-relay"
                   className="form-radio"
                 />
-                <label className="ml-2 cursor-pointer transition-all hover:text-gray-500" htmlFor="mondial-relay">
+                <label
+                  className="ml-2 cursor-pointer transition-all hover:text-gray-500"
+                  htmlFor="mondial-relay"
+                >
                   Mondial relay
                 </label>
               </div>

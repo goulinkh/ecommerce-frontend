@@ -16,7 +16,7 @@ import ShowPasswordSVG from 'public/icons/show-password.svg';
 const SignUp: React.FC = function () {
   const AnimatedDiv = makeAnimatedSeriesDiv();
   return (
-    <Layout navbar={false} footer={false}>
+    <Layout navbar={false} footer={false} title="Créer un compte">
       <AuthLogo position="right" />
       <div className="w-screen h-screen md:flex md:flex-row items-center justify-center">
         {/* Form */}

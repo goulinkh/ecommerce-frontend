@@ -16,7 +16,7 @@ const SignIn: React.FC = function () {
   const AnimatedDiv = makeAnimatedSeriesDiv();
 
   return (
-    <Layout navbar={false} footer={false}>
+    <Layout navbar={false} footer={false} title="Se connecter">
       <AuthLogo position="left" />
       <div className="w-screen h-screen md:flex md:flex-row items-center justify-center">
         <AuthImageCover invertX />

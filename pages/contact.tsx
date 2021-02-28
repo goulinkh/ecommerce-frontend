@@ -1,6 +1,7 @@
 import Button from 'components/Button';
 import Layout from 'components/Layout';
 import Modal from 'components/Modal';
+import Navbar from 'components/Navbar';
 import ContactForm from 'components/pages/Contact/ContactForm';
 import ContactMap from 'components/pages/Contact/Map';
 import ContactNavbar from 'components/pages/Contact/Navbar';
@@ -18,8 +19,8 @@ const Catalogue: React.FC = function () {
   });
   return (
     <>
-      <Layout footer={false} navbar={false} title="Contacter nous">
-        <ContactNavbar />
+      <Layout footer={false} navbar={false} title="Nous contacter">
+        <Navbar sticky={false} />
         <SocialLinks className="fixed top-16 right-6 z-20" />
         <div className="flex flex-col md:flex-row-reverse items-center md:justify-between h-screen w-screen pt-24 md:pt-0">
           <ContactForm

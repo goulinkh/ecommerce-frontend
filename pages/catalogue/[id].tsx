@@ -27,7 +27,7 @@ const Catalogue: React.FC<props> = function ({
     return <></>;
   }
   return (
-    <Layout navbarOverlap>
+    <Layout navbarOverlap title={`Catalogue ${catalogue.name}`}>
       {/* cover */}
       <CoverPhoto />
       <Container className="flex flex-row my-14">
